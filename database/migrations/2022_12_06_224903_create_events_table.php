@@ -16,6 +16,12 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('title');
+            $table->text('description');
+            $table->string('location');
+            $table->datetimeTz('start_date');
+            $table->datetimeTz('end_date');
+            $table->foreignId('user_id')->index();
         });
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -25,7 +26,12 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+      if (Auth::check()){
+        return view('events.create');
+      }
+      else {
+        return redirect(route('login'));
+      }
     }
 
     /**
