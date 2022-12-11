@@ -61,9 +61,6 @@ class EventController extends Controller
       ]);
 
       return redirect()->route('event.show', $event);
-
-
-
     }
 
     /**
@@ -88,8 +85,8 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-      return view('events.update', [
-        'event' => Event::find($event)
+      return view('events.edit', [
+        'event' => Event::findOrFail($event->id)
       ],
       );
     }
@@ -103,7 +100,24 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
+      $fields = $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+        'location' => 'required',
+        'start_date' => 'required',
+        'end_date' => 'required',
+      ]);
 
+      $event->update([
+        'title' => $request->title,
+        'description' => $request->description,
+        'start_date' => $request->start_date,
+        'end_date' => $request->end_date,
+        'user_id' => Auth::user()->id,
+        'location' => $request->location,
+      ]);
+
+      return redirect()->route('event.show', $event);
     }
 
     /**

@@ -5,6 +5,6 @@
     </x-page-title>
   </x-slot>
   
-  @include('events.partials.event-form')
+  @include('events.partials.create-event-form')
 
 </x-layouts.app>
