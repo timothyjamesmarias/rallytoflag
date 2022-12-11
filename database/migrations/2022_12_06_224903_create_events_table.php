@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('location');
-            $table->datetimeTz('start_date');
-            $table->datetimeTz('end_date');
+            $table->string('url')->nullable();
+            $table->datetime('start_date');
+            $table->datetime('end_date');
             $table->foreignId('user_id')->index();
         });
     }

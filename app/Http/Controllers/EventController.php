@@ -54,13 +54,16 @@ class EventController extends Controller
       $event = Event::create([
         'title' => $request->title,
         'description' => $request->description,
-        'location' => $request->location,
         'start_date' => $request->start_date,
         'end_date' => $request->end_date,
         'user_id' => Auth::user()->id,
+        'location' => $request->location,
       ]);
 
-      return redirect()->route('event.show', $event, 200);
+      return redirect()->route('event.show', $event);
+
+
+
     }
 
     /**
@@ -72,7 +75,7 @@ class EventController extends Controller
     public function show(Event $event)
     {
       return view('events.show', [
-        'event' => Event::find($event)
+        'event' => Event::findOrFail($event->id)
       ],
       );
     }
