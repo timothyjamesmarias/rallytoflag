@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
+use App\Models\EventImage;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -42,7 +43,24 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+      $fields = $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+        'location' => 'required',
+        'start_date' => 'required',
+        'end_date' => 'required',
+      ]);
+
+      $event = Event::create([
+        'title' => $request->title,
+        'description' => $request->description,
+        'location' => $request->location,
+        'start_date' => $request->start_date,
+        'end_date' => $request->end_date,
+        'user_id' => Auth::user()->id,
+      ]);
+
+      return redirect()->route('event.show', $event, 200);
     }
 
     /**
@@ -53,7 +71,10 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+      return view('events.show', [
+        'event' => Event::find($event)
+      ],
+      );
     }
 
     /**
@@ -64,7 +85,10 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+      return view('events.update', [
+        'event' => Event::find($event)
+      ],
+      );
     }
 
     /**
@@ -76,7 +100,7 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+
     }
 
     /**
@@ -87,6 +111,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+      Event::destroy($event);
+      return response('Event Deleted', 204);
     }
 }
