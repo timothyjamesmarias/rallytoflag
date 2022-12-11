@@ -9,11 +9,11 @@
     <x-nav-link :href="route('dashboard')">
       Account
     </x-nav-link>
-    <form method="POST" action={{ route('logout') }}>
+    <form method="POST" action="{{ route('logout') }}">
       @csrf
       <x-nav-link :href="route('logout')" 
         onclick="even.preventDefault(); this.closest('form').submit();"
-      >
+      class="ml-4">
         Sign Out
       </x-nav-link>
     </form>
@@ -22,7 +22,7 @@
     <x-nav-link :href="route('login')">
       Sign In
     </x-nav-link>
-    <x-nav-link :href="route('register')" class="pl-4">
+    <x-nav-link :href="route('register')" class="ml-4">
       Sign Up
     </x-nav-link>
   @endauth

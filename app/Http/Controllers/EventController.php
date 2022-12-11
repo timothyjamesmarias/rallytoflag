@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
+use App\Models\EventImage;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -25,7 +27,12 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+      if (Auth::check()){
+        return view('events.create');
+      }
+      else {
+        return redirect(route('login'));
+      }
     }
 
     /**
@@ -36,7 +43,24 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+      $fields = $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+        'location' => 'required',
+        'start_date' => 'required',
+        'end_date' => 'required',
+      ]);
+
+      $event = Event::create([
+        'title' => $request->title,
+        'description' => $request->description,
+        'start_date' => $request->start_date,
+        'end_date' => $request->end_date,
+        'user_id' => Auth::user()->id,
+        'location' => $request->location,
+      ]);
+
+      return redirect()->route('event.show', $event);
     }
 
     /**
@@ -47,7 +71,10 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+      return view('events.show', [
+        'event' => Event::findOrFail($event->id)
+      ],
+      );
     }
 
     /**
@@ -58,7 +85,10 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+      return view('events.edit', [
+        'event' => Event::findOrFail($event->id)
+      ],
+      );
     }
 
     /**
@@ -70,7 +100,24 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+      $fields = $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+        'location' => 'required',
+        'start_date' => 'required',
+        'end_date' => 'required',
+      ]);
+
+      $event->update([
+        'title' => $request->title,
+        'description' => $request->description,
+        'start_date' => $request->start_date,
+        'end_date' => $request->end_date,
+        'user_id' => Auth::user()->id,
+        'location' => $request->location,
+      ]);
+
+      return redirect()->route('event.show', $event);
     }
 
     /**
@@ -81,6 +128,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+      Event::destroy($event);
+      return response('Event Deleted', 204);
     }
 }
