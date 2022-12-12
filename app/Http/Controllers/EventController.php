@@ -49,8 +49,10 @@ class EventController extends Controller
         'location' => 'required',
         'start_date' => 'required',
         'end_date' => 'required',
+        //'images' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
       ]);
 
+      dd($request->all());
       $event = Event::create([
         'title' => $request->title,
         'description' => $request->description,
@@ -59,6 +61,17 @@ class EventController extends Controller
         'user_id' => Auth::user()->id,
         'location' => $request->location,
       ]);
+
+      if ($request->hasFile('images')) {
+        $images = $request->file('images');
+        foreach ($images as $image) {
+          $path = $image->store('images', 'public');
+          EventImage::create([
+            'path' => $path,
+            'event_id' => $event->id,
+          ]);
+        }
+      }
 
       return redirect()->route('event.show', $event);
     }
@@ -72,7 +85,8 @@ class EventController extends Controller
     public function show(Event $event)
     {
       return view('events.show', [
-        'event' => Event::findOrFail($event->id)
+        'event' => Event::findOrFail($event->id),
+        'images' => EventImage::where('event_id', $event->id)->get(),
       ],
       );
     }
@@ -116,6 +130,17 @@ class EventController extends Controller
         'user_id' => Auth::user()->id,
         'location' => $request->location,
       ]);
+
+      if ($request->hasFile('images')) {
+        $images = $request->file('images');
+        foreach ($images as $image) {
+          $path = $image->store('images', 'public');
+          EventImage::create([
+            'path' => $path,
+            'event_id' => $event->id,
+          ]);
+        }
+      }
 
       return redirect()->route('event.show', $event);
     }

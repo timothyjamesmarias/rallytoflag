@@ -5,5 +5,4 @@
     </x-page-title>
   </x-slot>
 
-
 </x-layouts.app>
