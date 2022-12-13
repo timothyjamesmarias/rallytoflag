@@ -3,7 +3,7 @@
 class="" enctype="multipart/form-data" id="event-form">
   @csrf
 
-  @method ('PUT')
+  @method ('PATCH')
 
   <x-input-label for="title" :value="__('Title')" />
   <x-text-input id="title" type="text" class="w-full"
@@ -12,7 +12,7 @@ class="" enctype="multipart/form-data" id="event-form">
 
   <x-input-label for="location" :value="__('Location')" />
   <x-text-input id="location" type="text" class="w-full"
-    name="location" :value="old('location', $event->location)" required autofocus/>
+    name="location" :value="old('location', $event->location)" required />
   <x-input-error :messages="$errors->get('location')" class="mt-2" />
 
   <x-input-label for="description" :value="__('Description')" />
@@ -30,6 +30,10 @@ class="" enctype="multipart/form-data" id="event-form">
   <x-text-input :type="'datetime-local'" class="w-full" id="end_date" name="end_date" 
   :value="old('end_date', $event->end_date)"/>
   <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
+
+  <x-input-label for="images" :value="__('Images')" />
+  <input id="images" type="file" name="images[]" multiple />
+  <x-input-error :messages="$errors->get('images')" class="mt-2" />
 
   <x-primary-button class="mt-3">
     Update
