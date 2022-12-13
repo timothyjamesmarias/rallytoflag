@@ -52,7 +52,6 @@ class EventController extends Controller
         //'images' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
       ]);
 
-      dd($request->all());
       $event = Event::create([
         'title' => $request->title,
         'description' => $request->description,

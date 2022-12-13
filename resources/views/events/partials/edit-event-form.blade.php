@@ -3,7 +3,7 @@
 class="" enctype="multipart/form-data" id="event-form">
   @csrf
 
-  @method ('PUT')
+  @method ('PATCH')
 
   <x-input-label for="title" :value="__('Title')" />
   <x-text-input id="title" type="text" class="w-full"
