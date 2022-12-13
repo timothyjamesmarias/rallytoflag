@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" >
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,8 +10,16 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased">
-        <div class="min-h-screen">
+    <body 
+      class="antialiased" 
+      x-data="{'darkMode': false}" 
+      x-init="
+      darkMode = JSON.parse(localStorage.getItem('darkMode')); 
+      $watch('darkMode', value => localStorage.setItem('darkMode' , JSON.stringify(value)));
+    ">
+        <div :class="{'dark': darkMode === true}">
+        <div class="min-h-screen bg-neutral-300 dark:bg-neutral-900" 
+          >
           <x-navigation />
             <!-- Page Heading -->
             @if (isset($header))
@@ -26,6 +34,7 @@
             <main>
                 {{ $slot }}
             </main>
+        </div>
         </div>
     </body>
 </html>

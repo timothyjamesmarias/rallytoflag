@@ -1,21 +1,24 @@
-<nav class="flex align-center justify-between bg-black text-xl p-6">
+<nav class="flex align-center justify-between text-xl p-6">
   <div>
     <x-nav-link :href="route('home')">
       Home
     </x-nav-link>
   </div>
   <div class="flex">
+    <x-dark-mode-toggle />
   @auth
     <x-nav-link :href="route('dashboard')">
       Account
     </x-nav-link>
     <form method="POST" action="{{ route('logout') }}">
       @csrf
-      <x-nav-link :href="route('logout')" 
-        onclick="even.preventDefault(); this.closest('form').submit();"
+      <button onclick="even.preventDefault(); this.closest('form').submit();"
       class="ml-4">
+        <x-nav-link>
+          Logout
+        </x-nav-link>
         Sign Out
-      </x-nav-link>
+      </button>
     </form>
   </div>
   @else
