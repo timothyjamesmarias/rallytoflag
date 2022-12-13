@@ -6,12 +6,12 @@ class="" enctype="multipart/form-data" id="event-form">
   @method ('PATCH')
 
   <x-input-label for="title" :value="__('Title')" />
-  <x-text-input id="title" type="text" class="w-full"
+  <x-input id="title" type="text" class="w-full"
     name="title" :value="old('title', $event->title)" required autofocus/>
   <x-input-error :messages="$errors->get('title')" class="mt-2" />
 
   <x-input-label for="location" :value="__('Location')" />
-  <x-text-input id="location" type="text" class="w-full"
+  <x-input id="location" type="text" class="w-full"
     name="location" :value="old('location', $event->location)" required />
   <x-input-error :messages="$errors->get('location')" class="mt-2" />
 
@@ -22,12 +22,12 @@ class="" enctype="multipart/form-data" id="event-form">
   <x-input-error :messages="$errors->get('description')" class="mt-2" />
 
   <x-input-label for="start_date" :value="__('Start Date')" />
-  <x-text-input :type="'datetime-local'" class="w-full" id="start_date" name="start_date" 
+  <x-input :type="'datetime-local'" class="w-full" id="start_date" name="start_date" 
   :value="old('start_date', $event->start_date)"/>
   <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
 
   <x-input-label for="end_date" :value="__('End Date')"/>
-  <x-text-input :type="'datetime-local'" class="w-full" id="end_date" name="end_date" 
+  <x-input :type="'datetime-local'" class="w-full" id="end_date" name="end_date" 
   :value="old('end_date', $event->end_date)"/>
   <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
 
