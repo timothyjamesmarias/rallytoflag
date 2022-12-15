@@ -15,12 +15,10 @@
       <button onclick="even.preventDefault(); this.closest('form').submit();"
       class="ml-4">
         <x-nav-link>
-          Logout
+          Sign Out
         </x-nav-link>
-        Sign Out
       </button>
     </form>
-  </div>
   @else
     <x-nav-link :href="route('login')">
       Sign In
