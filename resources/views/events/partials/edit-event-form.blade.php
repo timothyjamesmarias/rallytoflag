@@ -15,6 +15,11 @@ class="" enctype="multipart/form-data" id="event-form">
     name="location" :value="old('location', $event->location)" required />
   <x-input-error :messages="$errors->get('location')" class="mt-2" />
 
+  <x-input-label for="url" :value="__('Link to website (optional)')" />
+  <x-input id="url" type="text" class="w-full"
+    name="url" :value="old('url', $event->url)"/>
+  <x-input-error :messages="$errors->get('url')" class="mt-2" />
+
   <x-input-label for="description" :value="__('Description')" />
   <x-text-area-input id="description" name="description" class="w-full" required>
     {{ old('description', $event->description) }}

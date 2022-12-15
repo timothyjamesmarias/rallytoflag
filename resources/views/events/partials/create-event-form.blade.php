@@ -5,13 +5,18 @@ class="" enctype="multipart/form-data" id="event-form">
 
   <x-input-label for="title" :value="__('Title')" />
   <x-input id="title" type="text" class="w-full"
-    name="title" required autofocus/>
+    name="title" :value="old('title')" required autofocus/>
   <x-input-error :messages="$errors->get('title')" class="mt-2" />
 
   <x-input-label for="location" :value="__('Location')" />
   <x-input id="location" type="text" class="w-full"
-    name="location" required />
+    name="location" :value="old('location')" required />
   <x-input-error :messages="$errors->get('location')" class="mt-2" />
+
+  <x-input-label for="url" :value="__('Link to website (optional)')" />
+  <x-input id="url" type="text" class="w-full"
+    name="url" :value="old('url')"/>
+  <x-input-error :messages="$errors->get('url')" class="mt-2" />
 
   <x-input-label for="description" :value="__('Description')" />
   <x-text-area-input id="description" name="description" class="w-full" required />

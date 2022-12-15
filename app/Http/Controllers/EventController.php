@@ -49,6 +49,7 @@ class EventController extends Controller
         'location' => 'required',
         'start_date' => 'required',
         'end_date' => 'required',
+        'url' => 'nullable|url',
         //'images' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
       ]);
 
@@ -59,6 +60,7 @@ class EventController extends Controller
         'end_date' => $request->end_date,
         'user_id' => Auth::user()->id,
         'location' => $request->location,
+        'url' => $request->url,
       ]);
 
       if ($request->hasFile('images')) {
@@ -119,6 +121,7 @@ class EventController extends Controller
         'location' => 'required',
         'start_date' => 'required',
         'end_date' => 'required',
+        'url' => 'nullable|url',
       ]);
 
       $event->update([
@@ -128,6 +131,7 @@ class EventController extends Controller
         'end_date' => $request->end_date,
         'user_id' => Auth::user()->id,
         'location' => $request->location,
+        'url' => $request->url,
       ]);
 
       if ($request->hasFile('images')) {

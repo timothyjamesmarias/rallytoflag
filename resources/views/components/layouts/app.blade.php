@@ -7,10 +7,6 @@
 
         <title>{{ config('Compendium') }}</title>
 
-        <!-- Fonts -->
-        @googlefonts('Inter')
-        @googlefonts('Cinzel Decorative')
-
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -22,7 +18,7 @@
       $watch('darkMode', value => localStorage.setItem('darkMode' , JSON.stringify(value)));
     ">
         <div :class="{'dark': darkMode === true}">
-        <div class="min-h-screen bg-neutral-300 dark:bg-neutral-900" 
+        <div class="min-h-screen bg-stone-300 dark:bg-neutral-900" 
           >
           <x-navigation />
             <!-- Page Heading -->
