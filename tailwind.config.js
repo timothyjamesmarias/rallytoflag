@@ -12,6 +12,8 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
+              'inter': ['Inter'],
+              'cinzel': ['Cinzel Decorative'],
             },
         },
     },

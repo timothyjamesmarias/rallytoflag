@@ -7,6 +7,10 @@
 
         <title>{{ config('Compendium') }}</title>
 
+        <!-- Fonts -->
+        @googlefonts('Inter')
+        @googlefonts('Cinzel Decorative')
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
