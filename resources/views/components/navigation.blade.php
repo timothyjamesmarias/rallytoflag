@@ -1,23 +1,27 @@
-<nav class="flex align-center justify-between bg-black text-xl p-6">
+<nav class="sticky top-0 z-10 flex align-center justify-between text-xl p-6 
+border-b border-slate-500 dark:border-slate-700 bg-stone-100 dark:bg-stone-900
+opacity-95 backdrop-blur-4xl
+">
   <div>
     <x-nav-link :href="route('home')">
       Home
     </x-nav-link>
   </div>
   <div class="flex">
+    <x-dark-mode-toggle />
   @auth
     <x-nav-link :href="route('dashboard')">
       Account
     </x-nav-link>
     <form method="POST" action="{{ route('logout') }}">
       @csrf
-      <x-nav-link :href="route('logout')" 
-        onclick="even.preventDefault(); this.closest('form').submit();"
+      <button onclick="even.preventDefault(); this.closest('form').submit();"
       class="ml-4">
-        Sign Out
-      </x-nav-link>
+        <x-nav-link>
+          Sign Out
+        </x-nav-link>
+      </button>
     </form>
-  </div>
   @else
     <x-nav-link :href="route('login')">
       Sign In

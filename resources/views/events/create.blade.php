@@ -1,8 +1,6 @@
 <x-layouts.app>
   <x-slot name="header">
-    <x-page-title>
-     Post A New Event 
-    </x-page-title>
+    Post a New Event
   </x-slot>
   
   @include('events.partials.create-event-form')
