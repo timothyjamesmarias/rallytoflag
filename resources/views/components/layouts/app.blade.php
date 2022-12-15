@@ -12,7 +12,7 @@
     </head>
     <body 
       class="antialiased" 
-      x-data="{'darkMode': false}" 
+      x-data="{'darkMode': true}" 
       x-init="
       darkMode = JSON.parse(localStorage.getItem('darkMode')); 
       $watch('darkMode', value => localStorage.setItem('darkMode' , JSON.stringify(value)));
