@@ -1,4 +1,7 @@
-<nav class="sticky top-0 z-10 bg-black flex align-center justify-between text-xl p-6 border-b border-slate-500 dark:border-slate-700">
+<nav class="sticky top-0 z-10 flex align-center justify-between text-xl p-6 
+border-b border-slate-500 dark:border-slate-700 bg-stone-100 dark:bg-stone-900
+opacity-95 backdrop-blur-4xl
+">
   <div>
     <x-nav-link :href="route('home')">
       Home

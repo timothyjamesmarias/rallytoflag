@@ -18,7 +18,7 @@
       $watch('darkMode', value => localStorage.setItem('darkMode' , JSON.stringify(value)));
     ">
         <div :class="{'dark': darkMode === true}">
-        <div class="min-h-screen bg-stone-300 dark:bg-neutral-900" 
+        <div class="min-h-screen bg-stone-100 dark:bg-stone-900" 
           >
           <x-navigation />
             <!-- Page Heading -->
