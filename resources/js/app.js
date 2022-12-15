@@ -13,7 +13,7 @@ import 'photoswipe/style.css';
 window.Alpine = Alpine;
 
 const lightbox = new PhotoSwipeLightbox({
-  gallery: '#my-gallery',
+  gallery: '#gallery',
   children: 'a',
   pswpModule: () => import('photoswipe')
 });
