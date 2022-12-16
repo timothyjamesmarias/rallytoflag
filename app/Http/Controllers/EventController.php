@@ -18,7 +18,13 @@ class EventController extends Controller
     public function index()
     {
       return view('events.index', [
-        'events' => Event::all()
+        'events' => Event::query()
+          ->addSelect(['image' => EventImage::select('path')
+            ->whereColumn('event_id', 'events.id')
+            ->limit(1)
+          ])
+          ->orderBy('created_at', 'desc')
+          ->get()
       ]);
     }
 
