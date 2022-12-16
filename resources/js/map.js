@@ -41,10 +41,12 @@ if (addressField) {
   const addressFieldIcon = document.getElementsByClassName('mapboxgl-ctrl-geocoder--icon');
   const addressFieldContainer = document.getElementsByClassName('mapboxgl-ctrl-geocoder');
   const locationInput = document.getElementById('location');
-  const form = document.getElementById('even-form');
+  const form = document.getElementById('event-form');
 
-  addressFieldContainer[0].onChangeListener = (e) => {
-    alert('changed');
+
+  form.onsubmit = function() {
+    locationInput.value = addressField[0].value;
   }
+
 }
 
