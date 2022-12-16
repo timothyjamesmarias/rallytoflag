@@ -1,6 +1,6 @@
 import './bootstrap';
-import './map';
 import './photos';
+import './map';
 
 import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
 import "@fortawesome/fontawesome-free/scss/solid.scss";

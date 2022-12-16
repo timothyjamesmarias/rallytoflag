@@ -45,6 +45,7 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
+      dd($request->all());
       $fields = $request->validate([
         'title' => 'required',
         'description' => 'required',

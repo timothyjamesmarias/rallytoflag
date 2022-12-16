@@ -15,11 +15,11 @@ if (container) {
   });
 }
 
-const addressField = document.getElementById('geocoder');
+const addressField = document.getElementById('address-field');
 if (addressField) {
 
   const classes =['border-gray-300', 'focus:border-violet-500', 'focus:ring-violet-500', 'rounded-md',
-    'bg-white', 'dark:bg-neutral-200', 'drop-shadow-sm', 'dark:drop-shadow-none'];
+    'bg-white', 'dark:bg-neutral-200', 'drop-shadow-sm', 'dark:drop-shadow-none', 'w-full'];
 
   const geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
@@ -27,7 +27,7 @@ if (addressField) {
     types: 'country,region,place,postcode,locality,neighborhood'
   });
 
-  geocoder.addTo('#geocoder');
+  geocoder.addTo('#address-field');
 
   // Get the geocoder results container.
   const results = document.getElementById('result');
@@ -39,6 +39,12 @@ if (addressField) {
 
   const addressField = document.getElementsByClassName('mapboxgl-ctrl-geocoder--input');
   const addressFieldIcon = document.getElementsByClassName('mapboxgl-ctrl-geocoder--icon');
-  addressFieldIcon[0].remove();
-  addressField[0].classList.add(classes);
+  const addressFieldContainer = document.getElementsByClassName('mapboxgl-ctrl-geocoder');
+  const locationInput = document.getElementById('location');
+  const form = document.getElementById('even-form');
+
+  addressFieldContainer[0].onChangeListener = (e) => {
+    alert('changed');
+  }
 }
+

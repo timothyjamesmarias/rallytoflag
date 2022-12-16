@@ -9,7 +9,9 @@ class="" enctype="multipart/form-data" id="event-form">
   <x-input-error :messages="$errors->get('title')" class="mt-2" />
 
   <x-input-label for="location" :value="__('Address')" />
-  <div id="geocoder" >
+  <div id="address-field" >
+    <x-input id="location" type="hidden" class="w-full"
+      name="location" :value="old('location')" required />
   </div>
   <pre id="result"></pre>
   <x-input-error :messages="$errors->get('location')" class="mt-2" />
