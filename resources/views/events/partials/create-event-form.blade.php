@@ -8,9 +8,10 @@ class="" enctype="multipart/form-data" id="event-form">
     name="title" :value="old('title')" required autofocus/>
   <x-input-error :messages="$errors->get('title')" class="mt-2" />
 
-  <x-input-label for="location" :value="__('Location')" />
-  <x-input id="location" type="text" class="w-full"
-    name="location" :value="old('location')" required />
+  <x-input-label for="location" :value="__('Address')" />
+  <div id="geocoder" >
+  </div>
+  <pre id="result"></pre>
   <x-input-error :messages="$errors->get('location')" class="mt-2" />
 
   <x-input-label for="url" :value="__('Link to website (optional)')" />
