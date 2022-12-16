@@ -7,6 +7,8 @@
 
         <title>{{ config('Compendium') }}</title>
 
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -31,7 +33,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="min-h-screen">
                 {{ $slot }}
             </main>
         </div>
