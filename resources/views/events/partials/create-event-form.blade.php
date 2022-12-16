@@ -8,9 +8,11 @@ class="" enctype="multipart/form-data" id="event-form">
     name="title" :value="old('title')" required autofocus/>
   <x-input-error :messages="$errors->get('title')" class="mt-2" />
 
-  <x-input-label for="location" :value="__('Location')" />
-  <x-input id="location" type="text" class="w-full"
-    name="location" :value="old('location')" required />
+  <x-input-label for="location" :value="__('Address')" />
+  <div id="address-field" >
+    <x-input id="location" type="hidden" 
+      name="location" :value="old('location')" required />
+  </div>
   <x-input-error :messages="$errors->get('location')" class="mt-2" />
 
   <x-input-label for="url" :value="__('Link to website (optional)')" />
@@ -19,7 +21,9 @@ class="" enctype="multipart/form-data" id="event-form">
   <x-input-error :messages="$errors->get('url')" class="mt-2" />
 
   <x-input-label for="description" :value="__('Description')" />
-  <x-text-area-input id="description" name="description" class="w-full" required />
+  <x-text-area-input id="description" name="description" class="w-full" required >
+    {{ old('description') }}
+  </x-text-area-input>
   <x-input-error :messages="$errors->get('description')" class="mt-2" />
 
   <div class="flex mb-3">
@@ -49,4 +53,38 @@ class="" enctype="multipart/form-data" id="event-form">
   </x-primary-button>
 
 </form> 
+<style>
+  /*
+   * const classes = ['border-gray-300', 
+   * 'focus:border-violet-500', 'focus:ring-violet-500', 'rounded-md', 
+   * 'bg-white', 'dark:bg-neutral-200', 'drop-shadow-sm', 'dark:drop-shadow-none' ];
+   */
+.mapboxgl-ctrl-geocoder {
+  min-width: 100%;
+}
+
+.mapboxgl-ctrl-geocoder:focus {
+  outline: none;
+  border: 1px solid;
+}
+
+.mapboxgl-ctrl-geocoder--input {
+  background-color: rgb(255 255 255) !important;
+  border-color: rgb(209 213 219) !important;
+  border-radius: 0.25rem;
+  padding: 1.3rem;
+  width: 100%;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05));
+}
+
+.mapboxgl-ctrl-geocoder--input:focus {
+  border-color: rgb(139 92 246) !important;
+  box-shadow: 0 0 0 3px rgb(139 92 246 / 50%) !important;
+}
+
+.mapboxgl-ctrl-geocoder--input, .dark {
+  background-color: rgb(229 229 229);
+  filter: drop-shadow(0 0 #0000);
+}
+</style>
 </x-card>
