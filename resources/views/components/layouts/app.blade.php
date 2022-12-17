@@ -9,6 +9,7 @@
 
         <link href='https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
 
+        @livewireStyles
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -38,5 +39,6 @@
             </main>
         </div>
         </div>
+    @livewireScripts
     </body>
 </html>
