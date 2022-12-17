@@ -3,12 +3,8 @@
 <div id="map" ></div>
 </div>
 
-<div class="px-4 pb-10">
-  <div>
-  </div>
-
+<div class="mx-4 pb-10">
   @livewire('event-grid')
-
 </div>
 
 </x-layouts.app>

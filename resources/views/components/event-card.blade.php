@@ -1,7 +1,7 @@
 @props(['event' => $event])
 
 <a href="{{ route('event.show', $event) }}"class="xl:lg:md:sm:max-h-[400px] xs:max-h-[200px] 
-border border-gray-500 hover:border-gray-800 dark:hover:border-gray-300 rounded-lg">
+border border-gray-500 hover:border-violet-800 dark:hover:border-violet-300 rounded-lg">
 <div class="min-h-full rounded-lg bg-neutral-100 dark:bg-neutral-800">
   @if ($event->image)
   <img src="/storage/{{ $event->image }}" alt="event image" 
