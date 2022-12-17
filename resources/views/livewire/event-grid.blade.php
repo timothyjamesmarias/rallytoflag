@@ -4,4 +4,7 @@
   <x-event-card :event="$event" />
   @endforeach
   </div>
+  <div class="my-4">
+  {{ $events->links() }}
+  </div>
 </div>
