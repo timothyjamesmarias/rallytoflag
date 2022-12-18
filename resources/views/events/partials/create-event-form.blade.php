@@ -29,14 +29,14 @@ class="" enctype="multipart/form-data" id="event-form">
   <div class="flex mb-3">
     <div class="w-1/2 pr-2">
       <x-input-label for="start_date" :value="__('Start Date')" />
-      <x-input :type="'datetime-local'" class="w-full" id="start_date" name="start_date" 
+      <x-input :type="'date'" class="w-full" id="start_date" name="start_date" 
       :value="old('start_date')"/>
       <x-input-error :messages="$errors->get('start_date')" class="mt-2" />
     </div>
 
     <div class="w-1/2 pl-2">
       <x-input-label for="end_date" :value="__('End Date')"/>
-      <x-input :type="'datetime-local'" class="w-full" id="end_date" name="end_date" 
+      <x-input :type="'date'" class="w-full" id="end_date" name="end_date" 
       :value="old('end_date')"/>
       <x-input-error :messages="$errors->get('end_date')" class="mt-2" />
     </div>

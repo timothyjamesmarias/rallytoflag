@@ -2,10 +2,9 @@
   <div class="col-span-2 flex flex-col">
     <div>
     </div>
-    <x-input type="search" wire:model="search" placeholder="Search by name..." 
+    <x-input-label for="search" value="Filter by name" />
+    <x-input type="search" wire:model="search" placeholder="Search..." 
     class="mb-4" />
-    <x-input type="date" wire:model="date" placeholder="Search events by date..." 
-    class="mb-4"/>
   </div>
 
   <div class="col-span-10">

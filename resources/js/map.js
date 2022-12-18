@@ -4,7 +4,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 mapboxgl.accessToken = import.meta.env.VITE_MAP_BOX_API_KEY;
-/*
+
 const container = document.getElementById('map');
 if (container) {
   const map = new mapboxgl.Map({
@@ -14,7 +14,6 @@ if (container) {
       zoom: 5 // starting zoom
   });
 }
-*/
 
 var eventForm = document.getElementById('event-form');
 if (eventForm) {

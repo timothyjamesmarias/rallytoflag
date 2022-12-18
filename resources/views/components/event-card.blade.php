@@ -6,6 +6,7 @@ border border-gray-500 hover:border-violet-800 dark:hover:border-violet-300 roun
   @if ($event->image)
   <img src="/storage/{{ $event->image }}" alt="event image" 
   class="xl:lg:md:sm:max-h-[200px] xs:max-h-[100px] object-cover w-full rounded-t-lg" />
+  @else
   @endif
 
   <div class="flex flex-col p-4">

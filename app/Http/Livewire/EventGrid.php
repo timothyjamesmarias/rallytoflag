@@ -13,7 +13,7 @@ class EventGrid extends Component
 
 
     public $search = '';
-    public $date = '';
+    protected $queryString = ['search'];
 
     
     public function  updatedSearch()
@@ -24,10 +24,9 @@ class EventGrid extends Component
     public function render()
     {
         return view('livewire.event-grid', [
-        'events' => Event::where(function($query){
-            $query->where('title', 'like', '%' . $this->search . '%')
-              ->orWhere('start_date', 'like', '%', $this->date . '%');
-        })->addSelect(['image' => EventImage::select('path')
+        'events' => Event::query()
+          ->where('title', 'like', '%' . $this->search . '%')
+          ->addSelect(['image' => EventImage::select('path')
             ->whereColumn('event_id', 'events.id')
             ->limit(1)
           ])
