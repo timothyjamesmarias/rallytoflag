@@ -5,6 +5,9 @@
     <x-input-label for="search" value="Filter by name" />
     <x-input type="search" wire:model="search" placeholder="Search..." 
     class="mb-4" />
+    <x-input-label for="location" value="Filter by location" />
+    <x-input type="search" wire:model="location" placeholder="Search..." 
+    class="mb-4" />
   </div>
 
   <div class="col-span-10">

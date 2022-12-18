@@ -13,9 +13,9 @@ class EventGrid extends Component
 
 
     public $search = '';
-    protected $queryString = ['search'];
+    public $location = '';
+    protected $queryString = ['search', 'location'];
 
-    
     public function  updatedSearch()
     {
         $this->resetPage();
@@ -26,6 +26,7 @@ class EventGrid extends Component
         return view('livewire.event-grid', [
         'events' => Event::query()
           ->where('title', 'like', '%' . $this->search . '%')
+          ->orWhere('location', 'like', '%' . $this->location . '%')
           ->addSelect(['image' => EventImage::select('path')
             ->whereColumn('event_id', 'events.id')
             ->limit(1)

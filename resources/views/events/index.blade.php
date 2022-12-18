@@ -1,9 +1,7 @@
 <x-layouts.app>
-<div id="map-container">
-@livewire('map-box')
-</div>
+@livewire('search-map')
 
-<div class="mx-4 pb-10">
+<div class="mx-4 py-10">
   @livewire('event-grid')
 </div>
 </x-layouts.app>
