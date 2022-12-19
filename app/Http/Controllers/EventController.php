@@ -18,7 +18,7 @@ class EventController extends Controller
     public function index()
     {
       //querying occurs in /Http/Livewire/EventGrid.php
-      return view('events.index');
+      return inertia('Events/Index');
     }
 
     /**
@@ -29,7 +29,7 @@ class EventController extends Controller
     public function create()
     {
       if (Auth::check()){
-        return view('events.create');
+        return inertia('Events/Create');
       }
       else {
         return redirect(route('login'));
@@ -86,7 +86,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-      return view('events.show', [
+      return inertia('events.show', [
         'event' => Event::findOrFail($event->id),
         'images' => EventImage::where('event_id', $event->id)->get(),
       ],
