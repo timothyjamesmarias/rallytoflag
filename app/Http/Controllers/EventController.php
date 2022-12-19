@@ -17,8 +17,9 @@ class EventController extends Controller
      */
     public function index()
     {
-      //querying occurs in /Http/Livewire/EventGrid.php
-      return inertia('Events/Index');
+      return inertia('Events/Index', [
+        'events' => Event::all(),
+      ]);
     }
 
     /**
@@ -75,7 +76,7 @@ class EventController extends Controller
         }
       }
 
-      return redirect()->route('event.show', $event);
+      return redirect()->route('Events/Show', $event);
     }
 
     /**
@@ -86,7 +87,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-      return inertia('events.show', [
+      return inertia('Events/Show', [
         'event' => Event::findOrFail($event->id),
         'images' => EventImage::where('event_id', $event->id)->get(),
       ],
@@ -101,7 +102,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-      return view('events.edit', [
+      return view('Events/Edit', [
         'event' => Event::findOrFail($event->id)
       ],
       );
@@ -146,7 +147,7 @@ class EventController extends Controller
         }
       }
 
-      return redirect()->route('event.show', $event);
+      return redirect()->route('Events/Show', $event);
     }
 
     /**

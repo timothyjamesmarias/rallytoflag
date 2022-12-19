@@ -4,9 +4,9 @@ import NavBar from '@/Components/NavBar.vue';
 </script>
 
 <template>
-<div>
+<div class="bg-stone-100 dark:bg-stone-900">
   <NavBar />
-  <main>
+  <main class="min-h-screen">
     <slot />
   </main>
 </div>
