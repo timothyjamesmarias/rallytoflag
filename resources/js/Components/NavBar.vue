@@ -1,6 +1,7 @@
 <script setup>
 import { Inertia } from '@inertiajs/inertia'
 import NavLink from '@/Components/NavLink.vue';
+import DarkModeToggle from '@/Components/DarkModeToggle.vue';
 
 const logout = () => {
   Inertia.post(route('logout'));
@@ -15,6 +16,7 @@ opacity-95 backdrop-blur-4xl">
   <NavLink :href="'/'">
   Home
   </NavLink>
+  <DarkModeToggle />
 
   <div class="flex align-center" v-if="$page.props.auth.user">
     <NavLink :href="'/dashboard'">
