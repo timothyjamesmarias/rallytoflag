@@ -1,5 +1,6 @@
 <script setup>
 import NavBar from '@/Components/NavBar.vue';
+import PageTitle from '@/Components/PageTitle.vue';
 
 </script>
 
@@ -7,6 +8,9 @@ import NavBar from '@/Components/NavBar.vue';
 <div class="bg-stone-100 dark:bg-stone-900">
   <NavBar />
   <main class="min-h-screen">
+    <PageTitle>
+      <slot name="title"></slot>
+    </PageTitle>
     <slot />
   </main>
 </div>

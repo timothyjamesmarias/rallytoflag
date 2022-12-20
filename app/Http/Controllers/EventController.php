@@ -46,11 +46,11 @@ class EventController extends Controller
     public function store(StoreEventRequest $request)
     {
       $fields = $request->validate([
-        'title' => 'required',
+        'title' => 'required|max:255',
         'description' => 'required',
         'location' => 'required',
-        'start_date' => 'required',
-        'end_date' => 'required',
+        'start_date' => 'required|date',
+        'end_date' => 'nullable|date',
         'url' => 'nullable|url',
         //'images' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
       ]);
@@ -76,7 +76,7 @@ class EventController extends Controller
         }
       }
 
-      return redirect()->route('Events/Show', $event);
+      return redirect()->route('event.show', $event);
     }
 
     /**
