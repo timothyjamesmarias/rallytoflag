@@ -37,11 +37,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/events', [EventController::class, 'index'])->name('event.index');
-Route::post('/events', [EventController::class, 'store'])->name('event.store');
-Route::get('/events/new', [EventController::class, 'create'])->name('event.create');
+Route::post('/events', [EventController::class, 'store'])->name('event.store')->middleware('auth');;
+Route::get('/events/new', [EventController::class, 'create'])->name('event.create')->middleware('auth');;
 Route::get('/events/{event}', [EventController::class, 'show'])->name('event.show');
-Route::patch('/events/{event}', [EventController::class, 'update'])->name('event.update');
-Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('event.edit');
-Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('event.destroy');
+Route::patch('/events/{event}', [EventController::class, 'update'])->name('event.update')->middleware('auth');;
+Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('event.edit')->middleware('auth');
+Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('event.destroy')->middleware('auth');
 
 require __DIR__.'/auth.php';

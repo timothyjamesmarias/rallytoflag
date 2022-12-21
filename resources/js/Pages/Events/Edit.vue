@@ -2,13 +2,13 @@
 import Inertia from '@inertiajs/inertia'
 import Form from './Partials/Form.vue';
 
-const submit = () => {
-  Inertia.patch('/events{event}', form);
-};
+const props = defineProps({
+  event: Object,
+});
 
 </script>
 <template>
 
-<Form @submit="submit"/>
+<Form :state="'edit'" :event="event"/>
 
 </template>
