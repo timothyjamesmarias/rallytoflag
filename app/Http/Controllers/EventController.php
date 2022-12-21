@@ -18,8 +18,16 @@ class EventController extends Controller
     public function index()
     {
       return inertia('Events/Index', [
-        'events' => Event::all(),
-      ]);
+        'events' => Event::query()
+          //->where('title', 'like', '%' . $this->search . '%')
+          //->orWhere('location', 'like', '%' . $this->location . '%')
+          ->addSelect(['image' => EventImage::select('path')
+            ->whereColumn('event_id', 'events.id')
+            ->limit(1)
+          ])
+          ->orderBy('created_at', 'desc')
+          ->paginate(3)
+        ]);
     }
 
     /**
@@ -113,7 +121,6 @@ class EventController extends Controller
       else {
         return redirect(route('login'));
       }
-      );
     }
 
     /**
