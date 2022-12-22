@@ -5,14 +5,26 @@ import SearchInput from '@/Components/SearchInput.vue';
 import InputError from '@/Components/InputError.vue';
 import DateInput from '@/Components/DateInput.vue';
 import EventCard from '@/Components/EventCard.vue';
-import {ref, onMounted, onBeforeUnmount, watch} from 'vue';
+import {ref, computed, onMounted, onBeforeUnmount, watch} from 'vue';
 import {Inertia} from '@inertiajs/inertia';
-
+import { usePage } from '@inertiajs/inertia-vue3'
 const props = defineProps({
     events: {
         type: Object,
         required: true,
     },
+});
+
+const mapboxToken = import.meta.env.VITE_MAPBOX;
+mapboxgl.accessToken = mapboxToken;
+
+onMounted(() => {
+  const map = new mapboxgl.Map({
+  container: 'map', // container ID
+  style: 'mapbox://styles/mapbox/streets-v12', // style URL
+  center: [-74.5, 40], // starting position [lng, lat]
+  zoom: 9, // starting zoom
+  });
 });
 
 const search = ref('');
@@ -48,6 +60,10 @@ watch(search, value => {
 <style scoped>
 #map-container {
   height: 400px;
+  width: 100%;
+}
+#map {
+  height: 100%;
   width: 100%;
 }
 </style>
