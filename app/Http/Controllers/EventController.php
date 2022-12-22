@@ -19,14 +19,16 @@ class EventController extends Controller
     {
       return inertia('Events/Index', [
         'events' => Event::query()
-          //->where('title', 'like', '%' . $this->search . '%')
-          //->orWhere('location', 'like', '%' . $this->location . '%')
+          ->when(request('search'), function ($query) {
+            $query->where('title', 'like', '%' . request('search') . '%');
+          })
           ->addSelect(['image' => EventImage::select('path')
             ->whereColumn('event_id', 'events.id')
             ->limit(1)
           ])
           ->orderBy('created_at', 'desc')
           ->paginate(3)
+          ->withQueryString()
         ]);
     }
 
