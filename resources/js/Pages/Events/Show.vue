@@ -1,0 +1,66 @@
+<script setup>
+import {onMounted} from 'vue'
+const props = defineProps({
+  event: Object,
+  images: Array,
+});
+
+import PhotoSwipeLightbox from 'photoswipe/lightbox';
+import 'photoswipe/style.css';
+
+const lightbox = new PhotoSwipeLightbox({
+  gallery: '#gallery',
+  children: 'a',
+  pswpModule: () => import('photoswipe')
+});
+
+onMounted(() => {
+  lightbox.init();
+});
+
+</script>
+<template>
+<div class="flex flex-col sm:justify-center items-center pt-6 pb-10">
+  <div class="text-lg text-gray-900 dark:text-gray-400 w-full lg:md:max-w-4xl sm:max-w-md">
+    <div v-if="images.length > 0" class="flex flex-wrap justify-center" id="gallery">
+      <div v-if="images.length > 1">
+        <div class="grid grid-cols-2 gap-2 xs:grid-cols-1">
+          <div v-for="image in images" :key="image.id" >
+            <a :href="'/storage/'+ image.path" :data-size="image.width + 'x' + image.height" >
+              <img :src="'/storage/' + image.path" class="object-cover w-full h-full rounded-lg" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <img :src="'/storage/' + images[0].path" class="object-cover w-full h-full rounded-lg" />
+      </div>
+    </div>
+    <div v-else>
+      <img src="/castle.png" class="object-cover w-full h-full rounded-lg" />
+    </div>
+
+    <div>
+      <h1 class="text-xl font-bold text-gray-900 dark:text-gray-100 py-2">{{ event.title }}</h1>
+    </div>
+
+    <div class="text-xl py-2 ">
+      <p v-if="event.end_date !== null">{{ event.start_date }} until {{ event.end_date }}</p>
+      <p v-else>{{ event.start_date }}</p>
+      <p v-if="event.start_time !== null">Begins at {{ event.start_time }}</p>
+    </div>
+
+    <p class="py-2">
+      {{ event.location }}
+    </p>
+
+    <a v-if="event.url !== null" :href="event.url" class="underline text-violet-700 dark:text-violet-500 py-2">
+      {{ event.url }}
+    </a>
+
+    <p class="pt-4 leading-loose break-words">
+      {{ event.description }}
+    </p>
+  </div> 
+</div>
+</template>
