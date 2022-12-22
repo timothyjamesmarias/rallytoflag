@@ -9,9 +9,13 @@ class Event extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'location', 'start_date', 'end_date', 'url', 'user_id'];
+    protected $fillable = ['title', 'description', 'location', 'start_date', 'end_date', 'start_time', 'url', 'user_id'];
 
     public function images() {
       return $this->hasMany(EventImage::class);
+    }
+
+    public function user() {
+      return $this->belongsTo(User::class);
     }
 }

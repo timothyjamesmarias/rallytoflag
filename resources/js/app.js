@@ -1,14 +1,36 @@
 import './bootstrap';
-import './photos';
-import './map';
+import '../css/app.css';
 
-import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
-import "@fortawesome/fontawesome-free/scss/solid.scss";
-import "@fortawesome/fontawesome-free/scss/brands.scss";
-import "@fortawesome/fontawesome-free/scss/regular.scss";
+import { createApp, h } from 'vue';
+import { createInertiaApp, Head} from '@inertiajs/inertia-vue3';
+import { InertiaProgress } from '@inertiajs/progress';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faMoon } from '@fortawesome/free-solid-svg-icons'
+import AppLayout from './Layouts/AppLayout.vue';
+library.add(faMoon);
 
-import Alpine from 'alpinejs';
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
-window.Alpine = Alpine;
+createInertiaApp({
+    title: (title) => `${title} - ${appName}`,
+    resolve: (name) => {
+      const page = resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue'));
+      page.then((module) => {
+                module.default.layout = module.default.layout || AppLayout;
+      });
+      return page;
+    },
+    setup({ el, app, props, plugin }) {
+        return createApp({ render: () => h(app, props) })
+            .use(plugin)
+            .use(ZiggyVue, Ziggy)
+            .component('Head', Head)
+            .component('font-awesome-icon', FontAwesomeIcon)
+            .mount(el);
+    },
+});
 
-Alpine.start();
+InertiaProgress.init({ color: '#4B5563' });

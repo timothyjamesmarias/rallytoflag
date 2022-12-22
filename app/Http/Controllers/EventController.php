@@ -17,8 +17,21 @@ class EventController extends Controller
      */
     public function index()
     {
-      //querying occurs in /Http/Livewire/EventGrid.php
-      return view('events.index');
+      return inertia('Events/Index', [
+        'events' => Event::query()
+          ->when(request('search'), function ($query) {
+            $query
+              ->where('title', 'like', '%' . request('search') . '%')
+              ->orWhere('location', 'like', '%' . request('search') . '%');
+          })
+          ->addSelect(['image' => EventImage::select('path')
+            ->whereColumn('event_id', 'events.id')
+            ->limit(1)
+          ])
+          ->orderBy('created_at', 'desc')
+          ->paginate(3)
+          ->withQueryString()
+        ]);
     }
 
     /**
@@ -29,7 +42,7 @@ class EventController extends Controller
     public function create()
     {
       if (Auth::check()){
-        return view('events.create');
+        return inertia('Events/Create');
       }
       else {
         return redirect(route('login'));
@@ -45,12 +58,13 @@ class EventController extends Controller
     public function store(StoreEventRequest $request)
     {
       $fields = $request->validate([
-        'title' => 'required',
+        'title' => 'required|max:255',
         'description' => 'required',
         'location' => 'required',
-        'start_date' => 'required',
-        'end_date' => 'required',
+        'start_date' => 'required|date',
+        'end_date' => 'nullable|date|after:start_date',
         'url' => 'nullable|url',
+        'start_time' => 'nullable',
         //'images' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
       ]);
 
@@ -62,6 +76,7 @@ class EventController extends Controller
         'user_id' => Auth::user()->id,
         'location' => $request->location,
         'url' => $request->url,
+        'start_time' => $request->start_time,
       ]);
 
       if ($request->hasFile('images')) {
@@ -86,7 +101,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-      return view('events.show', [
+      return inertia('Events/Show', [
         'event' => Event::findOrFail($event->id),
         'images' => EventImage::where('event_id', $event->id)->get(),
       ],
@@ -101,10 +116,15 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-      return view('events.edit', [
-        'event' => Event::findOrFail($event->id)
-      ],
-      );
+      if (Auth::check() && Auth::user()->id == $event->user_id){
+        return inertia('Events/Edit', [
+          'event' => Event::findOrFail($event->id),
+          'images' => EventImage::where('event_id', $event->id)->get(),
+        ]);
+      }
+      else {
+        return redirect(route('login'));
+      }
     }
 
     /**
@@ -117,12 +137,13 @@ class EventController extends Controller
     public function update(UpdateEventRequest $request, Event $event)
     {
       $fields = $request->validate([
-        'title' => 'required',
+        'title' => 'required|max:255',
         'description' => 'required',
         'location' => 'required',
-        'start_date' => 'required',
-        'end_date' => 'required',
+        'start_date' => 'required|date',
+        'end_date' => 'nullable|date|after:start_date',
         'url' => 'nullable|url',
+        'start_time' => 'nullable',
       ]);
 
       $event->update([
@@ -133,6 +154,7 @@ class EventController extends Controller
         'user_id' => Auth::user()->id,
         'location' => $request->location,
         'url' => $request->url,
+        'start_time' => $request->start_time,
       ]);
 
       if ($request->hasFile('images')) {
