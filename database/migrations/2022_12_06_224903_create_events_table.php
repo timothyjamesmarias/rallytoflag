@@ -20,8 +20,9 @@ return new class extends Migration
             $table->text('description');
             $table->string('location');
             $table->string('url')->nullable();
-            $table->datetime('start_date');
-            $table->datetime('end_date');
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->time('start_time')->nullable();
             $table->foreignId('user_id')->index();
         });
     }
