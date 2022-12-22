@@ -16,13 +16,13 @@ const props = defineProps({
 });
 
 const form = useForm({
-    title: props.event.title || '',
-    description: props.event.description || '',
-    start_date: props.event.start_date || '',
-    end_date: props.event.end_date || '',
-    start_time: props.event.start_time || '',
-    url: props.event.url || '',
-    location: props.event.location || '',
+    title: '',
+    description: '',
+    start_date: '',
+    end_date: '',
+    start_time: '',
+    url: '',
+    location: '',
     images: null,
 });
 
@@ -54,7 +54,6 @@ let event_param = props.event.id;
       required
       autofocus
       autocomplete="title"
-      :value="$page.props.event.title"
     />
     <InputError class="mt-2" :message="form.errors.title" />
 
@@ -66,7 +65,6 @@ let event_param = props.event.id;
       v-model="form.location"
       required
       autocomplete="location"
-      :value="$page.props.event.location"
     />
     <InputError class="mt-2" :message="form.errors.location" />
 
@@ -77,7 +75,6 @@ let event_param = props.event.id;
       class="mt-1 block w-full"
       v-model="form.url"
       autocomplete="url"
-      :value="$page.props.event.url"
     />
     <InputError class="mt-2" :message="form.errors.url" />
 
@@ -88,25 +85,24 @@ let event_param = props.event.id;
       v-model="form.description"
       required
       autocomplete="description"
-      :value="$page.props.event.description"
     />
     <InputError class="mt-2" :message="form.errors.description" />
 
   <div class="flex mb-3">
     <div class="w-1/2 pr-2">
       <InputLabel for="start_date" value="Start Date" />
-      <DateInput id="start_date" autocomplete="start_date" class="mt-1 block w-full" v-model="form.start_date" :value="$page.props.event.start_date" required />
+      <DateInput id="start_date" autocomplete="start_date" class="mt-1 block w-full" v-model="form.start_date" required />
       <InputError class="mt-2" :message="form.errors.start_date" />
     </div>
     <div class="w-1/2 pl-2">
       <InputLabel for="end_date" value="End Date (optional)" />
-      <DateInput id="end_date" :value="$page.props.event.end_date" class="mt-1 block w-full" v-model="form.end_date" />
+      <DateInput id="end_date" class="mt-1 block w-full" v-model="form.end_date" />
       <InputError class="mt-2" :message="form.errors.end_date" />
     </div>
   </div>
 
   <InputLabel for="start_time" value="Start Time (optional)" />
-  <TimeInput id="start_time" class="mt-1 block w-full" :value="$page.props.event.start_time" v-model="form.start_time" />
+  <TimeInput id="start_time" class="mt-1 block w-full" v-model="form.start_time" />
 
   <InputLabel for="images" value="Images (max 6)" />
   <input type="file" name="images" class="mt-1" id="images" multiple @input="form.images = $event.target.files" />

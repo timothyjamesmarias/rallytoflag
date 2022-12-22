@@ -27,17 +27,17 @@ onMounted(() => {
         <div class="grid grid-cols-2 gap-2 xs:grid-cols-1">
           <div v-for="image in images" :key="image.id" >
             <a :href="'/storage/'+ image.path" :data-size="image.width + 'x' + image.height" >
-              <img :src="'/storage/' + image.path" class="object-cover w-full h-full" />
+              <img :src="'/storage/' + image.path" class="object-cover w-full h-full rounded-lg" />
             </a>
           </div>
         </div>
       </div>
       <div v-else>
-        <img :src="'/storage/' + images[0].path" class="object-cover w-full h-full" />
+        <img :src="'/storage/' + images[0].path" class="object-cover w-full h-full rounded-lg" />
       </div>
     </div>
     <div v-else>
-      <img src="/images/no-image.png" class="object-cover w-full h-full" />
+      <img src="/castle.png" class="object-cover w-full h-full rounded-lg" />
     </div>
 
     <div>

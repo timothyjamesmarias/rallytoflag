@@ -20,7 +20,9 @@ class EventController extends Controller
       return inertia('Events/Index', [
         'events' => Event::query()
           ->when(request('search'), function ($query) {
-            $query->where('title', 'like', '%' . request('search') . '%');
+            $query
+              ->where('title', 'like', '%' . request('search') . '%')
+              ->orWhere('location', 'like', '%' . request('search') . '%');
           })
           ->addSelect(['image' => EventImage::select('path')
             ->whereColumn('event_id', 'events.id')
@@ -60,9 +62,9 @@ class EventController extends Controller
         'description' => 'required',
         'location' => 'required',
         'start_date' => 'required|date',
-        'end_date' => 'nullable|date',
+        'end_date' => 'nullable|date|after:start_date',
         'url' => 'nullable|url',
-        'start_time' => 'nullable|date_format:H:i',
+        'start_time' => 'nullable',
         //'images' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
       ]);
 
@@ -139,9 +141,9 @@ class EventController extends Controller
         'description' => 'required',
         'location' => 'required',
         'start_date' => 'required|date',
-        'end_date' => 'nullable|date',
+        'end_date' => 'nullable|date|after:start_date',
         'url' => 'nullable|url',
-        'start_time' => 'nullable|date_format:H:i',
+        'start_time' => 'nullable',
       ]);
 
       $event->update([

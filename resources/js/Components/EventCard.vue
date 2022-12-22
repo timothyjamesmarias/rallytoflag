@@ -12,7 +12,7 @@ border border-gray-500 hover:border-violet-800 dark:hover:border-violet-300 roun
 <div class="min-h-full rounded-lg bg-neutral-100 dark:bg-neutral-800">
   <img v-if="event.image !== null" :src="'/storage/' + event.image" alt="event image" 
   class="xl:lg:md:sm:max-h-[200px] xs:max-h-[100px] object-cover w-full rounded-t-lg" />
-  <img v-else src="https://via.placeholder.com/150" alt="event image" 
+  <img v-else src="castle.png" alt="event image" 
   class="xl:lg:md:sm:max-h-[200px] xs:max-h-[100px] object-cover w-full rounded-t-lg" />
 
   <div class="flex flex-col p-4">

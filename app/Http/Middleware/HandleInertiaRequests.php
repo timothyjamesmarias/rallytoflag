@@ -43,7 +43,6 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
-            'mapbox' => env('MAPBOX'),
         ]);
     }
 }

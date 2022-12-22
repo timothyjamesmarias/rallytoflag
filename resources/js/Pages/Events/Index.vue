@@ -23,7 +23,7 @@ onMounted(() => {
   container: 'map', // container ID
   style: 'mapbox://styles/mapbox/streets-v12', // style URL
   center: [-74.5, 40], // starting position [lng, lat]
-  zoom: 9, // starting zoom
+  zoom: 5, // starting zoom
   });
 });
 
@@ -42,7 +42,7 @@ watch(search, value => {
 </div>
 <div class="grid lg:md:sm:grid-cols-12 xs:grid-cols-1 gap-4 p-4">
   <div class="col-span-2 flex flex-col">
-    <InputLabel for="search" label="Search" />
+    <InputLabel for="search" value="Search by name or address" class="mb-1"/>
     <TextInput
       type="search"
       id="search"
