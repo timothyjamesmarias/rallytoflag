@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\AdminController;
 use App\Models\Event;
 use App\Models\EventImage;
 
@@ -37,9 +38,11 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/admin', function () {
-    return Inertia::render('Admin');
-})->middleware(['auth', 'verified', 'admin'])->name('admin');
+Route::middleware('admin')->group(function () {
+  Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+  Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+  Route::get('/admin/events', [AdminController::class, 'events'])->name('admin.events');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
