@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { Link, useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/inertia-vue3';
 import Card from '@/Components/Card.vue';
 
 const props = defineProps({
