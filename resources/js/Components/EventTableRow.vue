@@ -14,10 +14,10 @@ const deleteEvent = () => {
 <template>
 <tr>
   <td class="py-2">
-    <a :href="route('event.show', event.id)">
+    <Link :href="route('event.show', event.id)">
       <img v-if="event.image !== null" :src="'/storage/' + event.image" class="w-10 h-10 rounded" />
       <img v-else src="/castle.png" class="w-10 h-10 rounded" />
-    </a>
+    </Link>
   </td>
   <td class="break-words">{{ event.title }}</td>
   <td class="xs:hidden">{{ event.start_date }}</td>

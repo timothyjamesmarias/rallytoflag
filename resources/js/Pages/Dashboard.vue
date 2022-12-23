@@ -2,6 +2,7 @@
 import { Head } from '@inertiajs/inertia-vue3';
 import EventTableRow from '@/Components/EventTableRow.vue';
 import Card from '@/Components/Card.vue';
+import Paginator from '@/Components/Paginator.vue';
 const props = defineProps({
     user: Object,
     events: Object,
@@ -28,5 +29,8 @@ const props = defineProps({
       <EventTableRow v-for="event in events.data" v-key="event.id" :event="event" />
     </tbody>
   </table>
+  <div>
+  </div>
+  <Paginator :links="events.links" />
 </Card>
 </template>

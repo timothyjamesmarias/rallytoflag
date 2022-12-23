@@ -7,7 +7,7 @@ const props = defineProps({
 });
 </script>
 <template>
-<a :href="route('event.show', event.id)" class="xl:lg:md:sm:max-h-[400px] xs:max-h-[200px] 
+<Link :href="route('event.show', event.id)" class="xl:lg:md:sm:max-h-[400px] xs:max-h-[200px] 
 border border-gray-500 hover:border-violet-800 dark:hover:border-violet-300 rounded-lg">
 <div class="min-h-full rounded-lg bg-neutral-100 dark:bg-neutral-800">
   <img v-if="event.image !== null" :src="'/storage/' + event.image" alt="event image" 
@@ -23,5 +23,5 @@ border border-gray-500 hover:border-violet-800 dark:hover:border-violet-300 roun
     <p class="text-gray-700 dark:text-gray-300">Posted on {{ event.created_at }}</p>
   </div>
 </div>
-</a>
+</Link>
 </template>
