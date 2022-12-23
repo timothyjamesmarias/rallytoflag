@@ -1,9 +1,8 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import Card from '@/Components/Card.vue';
 
 defineProps({
     mustVerifyEmail: Boolean,
@@ -21,21 +20,21 @@ defineProps({
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <Card class="text-left">
                     <UpdateProfileInformationForm
                         :must-verify-email="mustVerifyEmail"
                         :status="status"
                         class="max-w-xl"
                     />
-                </div>
+                </Card>
 
-                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <Card class="text-left">
                     <UpdatePasswordForm class="max-w-xl" />
-                </div>
+                </Card>
 
-                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <Card class="text-left">
                     <DeleteUserForm class="max-w-xl" />
-                </div>
+                </Card>
             </div>
         </div>
     </AuthenticatedLayout>
