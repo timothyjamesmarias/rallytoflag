@@ -9,9 +9,6 @@ const props = defineProps({
     events: Object,
 });
 
-const createEvent = () => {
-    console.log('create');
-};
 </script>
 
 <template>
@@ -25,9 +22,11 @@ const createEvent = () => {
 </div>
 </div>
 <Card class="text-left">
-  <h2 class="text-xl font-bold">My Events</h2>
-
-  <table class="table-fixed w-full">
+  <div class="flex justify-between">
+    <h2 class="text-xl font-bold">My Events</h2>
+    <PrimaryButton><Link :href="route('event.create')" v-html="'Add Event'"/></PrimaryButton>
+  </div>
+  <table class="w-full">
     <thead>
       <tr class="font-bold">
         <th>Image</th>
