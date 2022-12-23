@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\EventController;
+use App\Models\Event;
+use App\Models\EventImage;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +29,17 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+      'events' => Event::query()
+        ->where('user_id', auth()->user()->id)
+        ->addSelect(['image' => EventImage::select('path')
+          ->whereColumn('event_id', 'events.id')
+          ->limit(1)
+        ])
+        ->orderBy('created_at', 'desc')
+        ->paginate(1)
+        ->withQueryString()
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
