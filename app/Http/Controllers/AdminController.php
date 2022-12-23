@@ -28,7 +28,6 @@ class AdminController extends Controller
   {
     return inertia('Admin/Events', [
       'events' => Event::query()
-        ->where('user_id', auth()->user()->id)
         ->addSelect(['image' => EventImage::select('path')
           ->whereColumn('event_id', 'events.id')
           ->limit(1)
