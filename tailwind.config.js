@@ -11,6 +11,9 @@ module.exports = {
     darkMode: 'class',
     theme: {
         extend: {
+            screens: {
+              ...defaultTheme.screens,
+            },
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
