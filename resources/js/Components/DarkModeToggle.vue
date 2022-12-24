@@ -6,6 +6,6 @@ const toggleDark = useToggle(isDark);
 
 <template>
   <button id="dark-mode-toggle" @click="toggleDark()">
-    <font-awesome-icon icon="fa-solid fa-moon"  class="text-sky-700 hover:text-sky-600 dark:text-amber-500 hover:dark:text-amber-400"/>
+    <font-awesome-icon icon="fa-solid fa-moon"  class="text-2xl text-sky-700 hover:text-sky-600 dark:text-amber-500 hover:dark:text-amber-400"/>
   </button>
 </template>
