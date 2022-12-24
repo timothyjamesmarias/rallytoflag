@@ -18,6 +18,9 @@ opacity-95 backdrop-blur-4xl">
 
   <div class="flex items-center">
     <DarkModeToggle class="mr-4"/>
+    <NavLink :href="'/events'" class="pr-4">
+    Events
+    </NavLink>
 
     <template v-if="$page.props.auth.user">
     <NavLink :href="'/dashboard'" class="pr-4">

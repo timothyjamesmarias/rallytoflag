@@ -42,7 +42,8 @@ let event_param = props.event.id;
 </script>
 <template>
 <Card>
-  <h1 class="font-bold text-xl">Add a new event</h1>
+  <h1 v-if="state === 'create'" class="font-bold text-xl">Add a new event</h1>
+  <h1 v-else class="font-bold text-xl">Edit event</h1>
   <form @submit.prevent="submit" >
     <InputLabel for="title" class="mt-3" value="Title" />
     <Input

@@ -1,5 +1,8 @@
 <script setup>
-import {onMounted} from 'vue'
+import {onMounted} from 'vue';
+import {Inertia} from '@inertiajs/inertia';
+import DangerButton from '@/Components/DangerButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 const props = defineProps({
   event: Object,
   images: Array,
@@ -17,6 +20,14 @@ const lightbox = new PhotoSwipeLightbox({
 onMounted(() => {
   lightbox.init();
 });
+
+const editEvent = () => {
+  Inertia.visit(route('event.edit', props.event.id));
+};
+
+const deleteEvent = () => {
+  confirm('Are you sure you want to delete this event?') && Inertia.delete(route('event.destroy', props.event.id));
+};
 
 </script>
 <template>
@@ -62,5 +73,9 @@ onMounted(() => {
       {{ event.description }}
     </p>
   </div> 
+  <div class="">
+    <SecondaryButton @click="editEvent">Edit</SecondaryButton>
+    <DangerButton @click="deleteEvent">Delete</DangerButton>
+  </div>
 </div>
 </template>

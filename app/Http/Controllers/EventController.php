@@ -65,7 +65,8 @@ class EventController extends Controller
         'end_date' => 'nullable|date|after:start_date',
         'url' => 'nullable|url',
         'start_time' => 'nullable',
-        //'images' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'images' => 'nullable|array|max:6',
+        'images.*' => 'nullable|file|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
       ]);
 
       $event = Event::create([

@@ -1,9 +1,7 @@
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
-import SearchInput from '@/Components/SearchInput.vue';
+import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
-import DateInput from '@/Components/DateInput.vue';
 import EventCard from '@/Components/EventCard.vue';
 import {ref, computed, onMounted, onBeforeUnmount, watch} from 'vue';
 import {Inertia} from '@inertiajs/inertia';
@@ -43,7 +41,7 @@ watch(search, value => {
 <div class="grid lg:md:sm:grid-cols-12 xs:grid-cols-1 gap-4 p-4">
   <div class="col-span-2 flex flex-col">
     <InputLabel for="search" value="Search by name or address" class="mb-1"/>
-    <TextInput
+    <Input
       type="search"
       id="search"
       placeholder="Search..."
