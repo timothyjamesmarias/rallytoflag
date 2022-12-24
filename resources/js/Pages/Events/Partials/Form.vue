@@ -2,11 +2,9 @@
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import Input from '@/Components/Input.vue';
 import TextAreaInput from '@/Components/TextAreaInput.vue';
-import TimeInput from '@/Components/TimeInput.vue';
 import Card from '@/Components/Card.vue';
-import DateInput from '@/Components/DateInput.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
@@ -47,9 +45,9 @@ let event_param = props.event.id;
   <h1 class="font-bold text-xl">Add a new event</h1>
   <form @submit.prevent="submit" >
     <InputLabel for="title" class="mt-3" value="Title" />
-    <TextInput
-      id="title"
+    <Input
       type="text"
+      id="title"
       class="block w-full"
       v-model="form.title"
       required
@@ -59,9 +57,9 @@ let event_param = props.event.id;
     <InputError class="mt-3" :message="form.errors.title" />
 
     <InputLabel for="location" class="mt-3" value="Address" />
-    <TextInput
-      id="location"
+    <Input
       type="text"
+      id="location"
       class="block w-full"
       v-model="form.location"
       required
@@ -70,9 +68,9 @@ let event_param = props.event.id;
     <InputError class="mt-3" :message="form.errors.location" />
 
     <InputLabel for="url" class="mt-3" value="Event Website (optional)" />
-    <TextInput
-      id="url"
+    <Input
       type="text"
+      id="url"
       class="block w-full"
       v-model="form.url"
       autocomplete="url"
@@ -92,21 +90,21 @@ let event_param = props.event.id;
   <div class="flex">
     <div class="w-1/2 pr-2">
       <InputLabel for="start_date" class="mt-3" value="Start Date" />
-      <DateInput id="start_date" autocomplete="start_date" class="w-full" v-model="form.start_date" required />
+      <Input type="date" id="start_date" autocomplete="start_date" class="w-full" v-model="form.start_date" required />
       <InputError class="mt-3" :message="form.errors.start_date" />
     </div>
     <div class="w-1/2 pl-2">
       <InputLabel for="end_date" class="mt-3" value="End Date (optional)" />
-      <DateInput id="end_date" class="w-full" v-model="form.end_date" />
+      <Input type="date" id="end_date" class="w-full" v-model="form.end_date" />
       <InputError class="mt-3" :message="form.errors.end_date" />
     </div>
   </div>
 
   <InputLabel for="start_time" class="mt-3" value="Start Time (optional)" />
-  <TimeInput id="start_time" class="w-full" v-model="form.start_time" />
+  <Input type="time" id="start_time" class="w-full" v-model="form.start_time" />
 
   <InputLabel for="images" class="mt-3" value="Images (max 6)" />
-  <input type="file" name="images" id="images" multiple @input="form.images = $event.target.files" />
+  <Input type="file" name="images" id="images" multiple @input="form.images = $event.target.files" />
 
   <PrimaryButton class="float-right" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
     {{ props.state === 'create' ? 'Add Event' : 'Update Event' }}

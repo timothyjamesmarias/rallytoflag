@@ -3,7 +3,7 @@ import Checkbox from '@/Components/Checkbox.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import Input from '@/Components/Input.vue';
 import Card from '@/Components/Card.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 
@@ -38,7 +38,7 @@ const submit = () => {
       <div>
           <InputLabel for="email" value="Email" />
 
-          <TextInput
+          <Input
               id="email"
               type="email"
               class="mt-1 block w-full"
@@ -54,7 +54,7 @@ const submit = () => {
       <div class="mt-4">
           <InputLabel for="password" value="Password" />
 
-          <TextInput
+          <Input
               id="password"
               type="password"
               class="mt-1 block w-full"
@@ -69,7 +69,7 @@ const submit = () => {
       <div class="block mt-4">
           <label class="flex items-center">
               <Checkbox name="remember" v-model:checked="form.remember" />
-              <span class="ml-2 block font-medium text-sm text-gray-700 dark:text-gray-300">Remember me</span>
+              <span class="ml-2 block font-medium">Remember me</span>
           </label>
       </div>
 
@@ -77,7 +77,7 @@ const submit = () => {
           <Link
               v-if="canResetPassword"
               :href="route('password.request')"
-              class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+              class="underline text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
           >
               Forgot your password?
           </Link>

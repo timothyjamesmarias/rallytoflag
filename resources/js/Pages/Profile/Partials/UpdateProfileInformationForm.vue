@@ -2,7 +2,7 @@
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import Input from '@/Components/Input.vue';
 import { useForm, usePage } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue';
 
@@ -33,7 +33,7 @@ const form = useForm({
             <div>
                 <InputLabel for="name" value="Name" />
 
-                <TextInput
+                <Input
                     id="name"
                     type="text"
                     class="mt-1 block w-full"
@@ -49,7 +49,7 @@ const form = useForm({
             <div>
                 <InputLabel for="email" value="Email" />
 
-                <TextInput
+                <Input
                     id="email"
                     type="email"
                     class="mt-1 block w-full"
