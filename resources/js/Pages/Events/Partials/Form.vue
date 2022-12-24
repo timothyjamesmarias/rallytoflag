@@ -44,70 +44,71 @@ let event_param = props.event.id;
 </script>
 <template>
 <Card>
+  <h1 class="font-bold text-xl">Add a new event</h1>
   <form @submit.prevent="submit" >
-    <InputLabel for="title" value="Event Title" />
+    <InputLabel for="title" class="mt-3" value="Title" />
     <TextInput
       id="title"
       type="text"
-      class="mt-1 block w-full"
+      class="block w-full"
       v-model="form.title"
       required
       autofocus
       autocomplete="title"
     />
-    <InputError class="mt-2" :message="form.errors.title" />
+    <InputError class="mt-3" :message="form.errors.title" />
 
-    <InputLabel for="location" value="Address" />
+    <InputLabel for="location" class="mt-3" value="Address" />
     <TextInput
       id="location"
       type="text"
-      class="mt-1 block w-full"
+      class="block w-full"
       v-model="form.location"
       required
       autocomplete="location"
     />
-    <InputError class="mt-2" :message="form.errors.location" />
+    <InputError class="mt-3" :message="form.errors.location" />
 
-    <InputLabel for="url" value="Event Website (optional)" />
+    <InputLabel for="url" class="mt-3" value="Event Website (optional)" />
     <TextInput
       id="url"
       type="text"
-      class="mt-1 block w-full"
+      class="block w-full"
       v-model="form.url"
       autocomplete="url"
     />
-    <InputError class="mt-2" :message="form.errors.url" />
+    <InputError class="mt-3" :message="form.errors.url" />
 
-    <InputLabel for="description" value="Description" />
+    <InputLabel for="description" class="mt-3" value="Description" />
     <TextAreaInput
       id="description"
-      class="mt-1 block w-full"
+      class="block w-full"
       v-model="form.description"
       required
       autocomplete="description"
     />
-    <InputError class="mt-2" :message="form.errors.description" />
+    <InputError class="mt-3" :message="form.errors.description" />
 
-  <div class="flex mb-3">
+  <div class="flex">
     <div class="w-1/2 pr-2">
-      <InputLabel for="start_date" value="Start Date" />
-      <DateInput id="start_date" autocomplete="start_date" class="mt-1 block w-full" v-model="form.start_date" required />
-      <InputError class="mt-2" :message="form.errors.start_date" />
+      <InputLabel for="start_date" class="mt-3" value="Start Date" />
+      <DateInput id="start_date" autocomplete="start_date" class="w-full" v-model="form.start_date" required />
+      <InputError class="mt-3" :message="form.errors.start_date" />
     </div>
     <div class="w-1/2 pl-2">
-      <InputLabel for="end_date" value="End Date (optional)" />
-      <DateInput id="end_date" class="mt-1 block w-full" v-model="form.end_date" />
-      <InputError class="mt-2" :message="form.errors.end_date" />
+      <InputLabel for="end_date" class="mt-3" value="End Date (optional)" />
+      <DateInput id="end_date" class="w-full" v-model="form.end_date" />
+      <InputError class="mt-3" :message="form.errors.end_date" />
     </div>
   </div>
 
-  <InputLabel for="start_time" value="Start Time (optional)" />
-  <TimeInput id="start_time" class="mt-1 block w-full" v-model="form.start_time" />
+  <InputLabel for="start_time" class="mt-3" value="Start Time (optional)" />
+  <TimeInput id="start_time" class="w-full" v-model="form.start_time" />
 
-  <InputLabel for="images" value="Images (max 6)" />
-  <input type="file" name="images" class="mt-1" id="images" multiple @input="form.images = $event.target.files" />
+  <InputLabel for="images" class="mt-3" value="Images (max 6)" />
+  <input type="file" name="images" id="images" multiple @input="form.images = $event.target.files" />
 
-  <PrimaryButton class="mt-4 float-right" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+  <PrimaryButton class="float-right" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
     {{ props.state === 'create' ? 'Add Event' : 'Update Event' }}
   </PrimaryButton>
   </form>
