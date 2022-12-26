@@ -98,7 +98,7 @@ const updateLocation = (e) => {
 
     <InputLabel for="url" class="mt-3" value="Event Website (optional)" />
     <Input
-      type="text"
+      type="url"
       id="url"
       class="block w-full"
       v-model="form.url"
