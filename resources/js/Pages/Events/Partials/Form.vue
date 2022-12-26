@@ -70,6 +70,10 @@ onMounted(() => {
   geocoder.addTo('#geocoder');
 });
 
+const updateLocation = (e) => {
+  form.location = e.target.value;
+};
+
 </script>
 <template>
 <Card>
@@ -89,7 +93,7 @@ onMounted(() => {
     <InputError class="mt-3" :message="form.errors.title" />
 
     <InputLabel for="location" class="mt-3" value="Address" />
-    <div id="geocoder"></div>
+    <div id="geocoder" @change="updateLocation($event)"></div>
     <InputError class="mt-3" :message="form.errors.location" />
 
     <InputLabel for="url" class="mt-3" value="Event Website (optional)" />
