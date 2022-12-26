@@ -7,6 +7,9 @@ import TextAreaInput from '@/Components/TextAreaInput.vue';
 import Card from '@/Components/Card.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
+import { onMounted } from 'vue';
+
+const mapboxToken = import.meta.env.VITE_MAPBOX;
 
 const props = defineProps({
   event: {
@@ -58,6 +61,15 @@ else if (props.state === 'edit') {
   }
 }
 
+const geocoder = new MapboxGeocoder({
+  accessToken: mapboxToken,
+  types: 'country,region,place,postcode,locality,neighborhood',
+});
+
+onMounted(() => {
+  geocoder.addTo('#geocoder');
+});
+
 </script>
 <template>
 <Card>
@@ -77,14 +89,7 @@ else if (props.state === 'edit') {
     <InputError class="mt-3" :message="form.errors.title" />
 
     <InputLabel for="location" class="mt-3" value="Address" />
-    <Input
-      type="text"
-      id="location"
-      class="block w-full"
-      v-model="form.location"
-      required
-      autocomplete="location"
-    />
+    <div id="geocoder"></div>
     <InputError class="mt-3" :message="form.errors.location" />
 
     <InputLabel for="url" class="mt-3" value="Event Website (optional)" />
