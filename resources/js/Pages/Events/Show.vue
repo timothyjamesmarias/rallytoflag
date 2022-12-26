@@ -1,5 +1,8 @@
 <script setup>
-import {onMounted} from 'vue'
+import {onMounted} from 'vue';
+import {Inertia} from '@inertiajs/inertia';
+import DangerButton from '@/Components/DangerButton.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
 const props = defineProps({
   event: Object,
   images: Array,
@@ -18,6 +21,14 @@ onMounted(() => {
   lightbox.init();
 });
 
+const editEvent = () => {
+  Inertia.visit(route('event.edit', props.event.id));
+};
+
+const deleteEvent = () => {
+  confirm('Are you sure you want to delete this event?') && Inertia.delete(route('event.destroy', props.event.id));
+};
+
 </script>
 <template>
 <div class="flex flex-col sm:justify-center items-center pt-6 pb-10">
@@ -27,17 +38,17 @@ onMounted(() => {
         <div class="grid grid-cols-2 gap-2 xs:grid-cols-1">
           <div v-for="image in images" :key="image.id" >
             <a :href="'/storage/'+ image.path" :data-size="image.width + 'x' + image.height" >
-              <img :src="'/storage/' + image.path" class="object-cover w-full h-full rounded-lg" />
+              <img :src="'/storage/' + image.path" class="object-cover w-full h-full shadow-md dark:shadow-none rounded-lg" />
             </a>
           </div>
         </div>
       </div>
       <div v-else>
-        <img :src="'/storage/' + images[0].path" class="object-cover w-full h-full rounded-lg" />
+        <img :src="'/storage/' + images[0].path" class="object-cover w-full h-full shadow-md dark:shadow-none rounded-lg" />
       </div>
     </div>
     <div v-else>
-      <img src="/castle.png" class="object-cover w-full h-full rounded-lg" />
+      <img src="/castle.png" class="object-cover w-full h-full shadow-md dark:shadow-none rounded-lg" />
     </div>
 
     <div>
@@ -62,5 +73,9 @@ onMounted(() => {
       {{ event.description }}
     </p>
   </div> 
+  <div v-if="$page.props.auth.user">
+    <SecondaryButton @click="editEvent">Edit</SecondaryButton>
+    <DangerButton @click="deleteEvent">Delete</DangerButton>
+  </div>
 </div>
 </template>

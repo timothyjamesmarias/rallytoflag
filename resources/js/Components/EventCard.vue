@@ -16,11 +16,11 @@ border border-gray-500 hover:border-violet-800 dark:hover:border-violet-300 roun
   class="xl:lg:md:sm:max-h-[200px] xs:max-h-[100px] object-cover w-full rounded-t-lg" />
 
   <div class="flex flex-col p-4">
-    <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 pb-1">{{ event.title }}</h3>
-    <p class="text-gray-700 dark:text-gray-300 pb-1">{{ event.location }}</p>
-    <p class="text-gray-700 dark:text-gray-300 pb-1"><strong>Starts on </strong>{{ event.start_date }}</p>
-    <p v-if="event.end_date !== null" class="text-gray-700 dark:text-gray-300 pb-1"><strong>Ends on </strong>{{ event.end_date }}</p>
-    <p class="text-gray-700 dark:text-gray-300">Posted on {{ event.created_at }}</p>
+    <h3 class="text-lg font-bold pb-1">{{ event.title }}</h3>
+    <p class="pb-1">{{ event.location }}</p>
+    <p class="pb-1"><strong>Starts on </strong>{{ event.start_date }}</p>
+    <p v-if="event.end_date !== null" class="pb-1"><strong>Ends on </strong>{{ event.end_date }}</p>
+    <p>Posted on {{ event.created_at }}</p>
   </div>
 </div>
 </Link>

@@ -15,7 +15,8 @@ module.exports = {
               ...defaultTheme.screens,
             },
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+              'logo': ['UnifrakturMaguntia', 'cursive'],
+              'sans': ['Open+Sans'],
             },
         },
     },

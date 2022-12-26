@@ -2,7 +2,7 @@
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import Input from '@/Components/Input.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import Card from '@/Components/Card.vue';
 
@@ -23,7 +23,7 @@ const submit = () => {
 <Card>
         <Head title="Forgot Password" />
 
-        <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+        <div class="mb-4 text-gray-600 dark:text-gray-400">
             Forgot your password? No problem. Just let us know your email address and we will email you a password reset
             link that will allow you to choose a new one.
         </div>
@@ -36,7 +36,7 @@ const submit = () => {
             <div>
                 <InputLabel for="email" value="Email" />
 
-                <TextInput
+                <Input
                     id="email"
                     type="email"
                     class="mt-1 block w-full"

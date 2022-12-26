@@ -2,7 +2,7 @@
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import Input from '@/Components/Input.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
@@ -32,7 +32,7 @@ const submit = () => {
       <div>
           <InputLabel for="email" value="Email" />
 
-          <TextInput
+          <Input
               id="email"
               type="email"
               class="mt-1 block w-full"
@@ -48,7 +48,7 @@ const submit = () => {
       <div class="mt-4">
           <InputLabel for="password" value="Password" />
 
-          <TextInput
+          <Input
               id="password"
               type="password"
               class="mt-1 block w-full"
@@ -63,7 +63,7 @@ const submit = () => {
       <div class="mt-4">
           <InputLabel for="password_confirmation" value="Confirm Password" />
 
-          <TextInput
+          <Input
               id="password_confirmation"
               type="password"
               class="mt-1 block w-full"

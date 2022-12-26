@@ -1,15 +1,19 @@
 <script setup>
+import { Inertia } from '@inertiajs/inertia'
 import SecondaryButton from './SecondaryButton.vue';
 import DangerButton from './DangerButton.vue';
 const props = defineProps({
     event: Object,
 });
+
 const editEvent = () => {
-  console.log('edit');
+  Inertia.visit(route('event.edit', props.event.id));
 };
+
 const deleteEvent = () => {
-  console.log('delete');
+  confirm('Are you sure you want to delete this event?') && Inertia.delete(route('event.destroy', props.event.id));
 };
+
 </script>
 <template>
 <tr>
