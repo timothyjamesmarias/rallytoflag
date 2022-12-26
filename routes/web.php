@@ -5,6 +5,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\AdminController;
+use App\Models\Event;
+use App\Models\EventImage;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,17 +21,28 @@ use App\Http\Controllers\EventController;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('Welcome');
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+      'events' => Event::query()
+        ->where('user_id', auth()->user()->id)
+        ->addSelect(['image' => EventImage::select('path')
+          ->whereColumn('event_id', 'events.id')
+          ->limit(1)
+        ])
+        ->orderBy('created_at', 'desc')
+        ->paginate(10)
+        ->withQueryString()
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('admin')->group(function () {
+  Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+  Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+  Route::get('/admin/events', [AdminController::class, 'events'])->name('admin.events');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -37,11 +51,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/events', [EventController::class, 'index'])->name('event.index');
-Route::post('/events', [EventController::class, 'store'])->name('event.store')->middleware('auth');;
-Route::get('/events/new', [EventController::class, 'create'])->name('event.create')->middleware('auth');;
+Route::post('/events', [EventController::class, 'store'])->name('event.store')->middleware(['auth', 'verified']);;
+Route::get('/events/new', [EventController::class, 'create'])->name('event.create')->middleware(['auth', 'verified']);;
 Route::get('/events/{event}', [EventController::class, 'show'])->name('event.show');
-Route::patch('/events/{event}', [EventController::class, 'update'])->name('event.update')->middleware('auth');;
-Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('event.edit')->middleware('auth');
-Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('event.destroy')->middleware('auth');
+Route::patch('/events/{event}', [EventController::class, 'update'])->name('event.update')->middleware(['auth', 'verified']);;
+Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('event.edit')->middleware(['auth', 'verified']);
+Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('event.destroy')->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

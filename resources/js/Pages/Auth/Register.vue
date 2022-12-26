@@ -2,8 +2,8 @@
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm } from '@inertiajs/inertia-vue3';
+import Input from '@/Components/Input.vue';
+import { useForm } from '@inertiajs/inertia-vue3';
 import Card from '@/Components/Card.vue';
 
 const form = useForm({
@@ -28,7 +28,7 @@ const submit = () => {
       <div>
           <InputLabel for="name" value="Name" />
 
-          <TextInput
+          <Input
               id="name"
               type="text"
               class="mt-1 block w-full"
@@ -44,7 +44,7 @@ const submit = () => {
       <div class="mt-4">
           <InputLabel for="email" value="Email" />
 
-          <TextInput
+          <Input
               id="email"
               type="email"
               class="mt-1 block w-full"
@@ -59,7 +59,7 @@ const submit = () => {
       <div class="mt-4">
           <InputLabel for="password" value="Password" />
 
-          <TextInput
+          <Input
               id="password"
               type="password"
               class="mt-1 block w-full"
@@ -74,7 +74,7 @@ const submit = () => {
       <div class="mt-4">
           <InputLabel for="password_confirmation" value="Confirm Password" />
 
-          <TextInput
+          <Input
               id="password_confirmation"
               type="password"
               class="mt-1 block w-full"
@@ -89,7 +89,7 @@ const submit = () => {
       <div class="flex items-center justify-end mt-4">
           <Link
               :href="route('login')"
-              class="underline text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+              class="underline hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
           >
               Already registered?
           </Link>

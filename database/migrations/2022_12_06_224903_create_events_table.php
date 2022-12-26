@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->time('start_time')->nullable();
-            $table->foreignId('user_id')->index();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->index();
         });
     }
 

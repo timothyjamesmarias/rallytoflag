@@ -2,8 +2,8 @@
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, useForm } from '@inertiajs/inertia-vue3';
+import Input from '@/Components/Input.vue';
+import { useForm } from '@inertiajs/inertia-vue3';
 
 const form = useForm({
     password: '',
@@ -20,14 +20,14 @@ const submit = () => {
 <Card>
   <Head title="Confirm Password" />
 
-  <div class="mb-4 text-sm text-gray-700 dark:text-gray-300">
+  <div class="mb-4">
       This is a secure area of the application. Please confirm your password before continuing.
   </div>
 
   <form @submit.prevent="submit">
       <div>
           <InputLabel for="password" value="Password" />
-          <TextInput
+          <Input
               id="password"
               type="password"
               class="mt-1 block w-full"

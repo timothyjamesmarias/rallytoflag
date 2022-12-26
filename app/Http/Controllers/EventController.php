@@ -29,7 +29,7 @@ class EventController extends Controller
             ->limit(1)
           ])
           ->orderBy('created_at', 'desc')
-          ->paginate(3)
+          ->paginate(9)
           ->withQueryString()
         ]);
     }
@@ -65,7 +65,8 @@ class EventController extends Controller
         'end_date' => 'nullable|date|after:start_date',
         'url' => 'nullable|url',
         'start_time' => 'nullable',
-        //'images' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'images' => 'nullable|array|max:6',
+        'images.*' => 'nullable|file|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
       ]);
 
       $event = Event::create([
@@ -144,6 +145,8 @@ class EventController extends Controller
         'end_date' => 'nullable|date|after:start_date',
         'url' => 'nullable|url',
         'start_time' => 'nullable',
+        'images' => 'nullable|array|max:6',
+        'images.*' => 'nullable|file|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
       ]);
 
       $event->update([
@@ -158,6 +161,10 @@ class EventController extends Controller
       ]);
 
       if ($request->hasFile('images')) {
+        // Delete old images
+        EventImage::where('event_id', $event->id)->delete();
+
+        // Add new images
         $images = $request->file('images');
         foreach ($images as $image) {
           $path = $image->store('images', 'public');
