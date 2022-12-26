@@ -1,4 +1,5 @@
 <script setup>
+import { Inertia } from '@inertiajs/inertia'
 import SecondaryButton from './SecondaryButton.vue';
 import DangerButton from './DangerButton.vue';
 const props = defineProps({

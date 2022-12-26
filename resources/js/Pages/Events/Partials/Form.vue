@@ -6,6 +6,7 @@ import Input from '@/Components/Input.vue';
 import TextAreaInput from '@/Components/TextAreaInput.vue';
 import Card from '@/Components/Card.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
   event: Object,
@@ -32,11 +33,12 @@ if (props.state === 'create') {
   }
 }
 else if (props.state === 'edit') {
-let event_param = props.event.id;
   submit = () => {
-    form.patch(route('event.update', props.event))
+    Inertia.post(route('event.update', props.event), {
+      _method: 'PATCH',
+      ...form,
+    });
   }
-
 }
 
 </script>
@@ -104,10 +106,16 @@ let event_param = props.event.id;
   <InputLabel for="start_time" class="mt-3" value="Start Time (optional)" />
   <Input type="time" id="start_time" class="w-full" v-model="form.start_time" />
 
-  <InputLabel for="images" class="mt-3" value="Images (max 6)" />
-  <Input type="file" name="images" id="images" multiple @input="form.images = $event.target.files" />
+  <template v-if="state === 'create'">
+    <InputLabel for="images" class="mt-3" value="Images (optional, max 6)" />
+  </template>
+  <template v-else>
+    <InputLabel for="images" class="mt-3" value="Images, (optional, max 6, upload to replace current images)" />
+  </template>
+  <input type="file" id="images" class="w-full" multiple @input="form.images = $event.target.files" />
+  <InputError class="mt-3" :message="form.errors.images" />
 
-  <PrimaryButton class="float-right" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+  <PrimaryButton class="float-right mt-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
     {{ props.state === 'create' ? 'Add Event' : 'Update Event' }}
   </PrimaryButton>
   </form>
