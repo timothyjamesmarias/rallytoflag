@@ -9,30 +9,47 @@ import { useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
-  event: Object,
+  event: {
+    type: Object,
+    required: false,
+  },
   errors: Object,
-  state: String,
+  state: {
+    type: String,
+    required: true,
+  },
 });
 
-const form = useForm({
-    title: '',
-    description: '',
-    start_date: '',
-    end_date: '',
-    start_time: '',
-    url: '',
-    location: '',
-    images: null,
-});
-
-let submit;
+let form, submit;
 
 if (props.state === 'create') {
+  form = useForm({
+      title: '',
+      description: '',
+      start_date: '',
+      end_date: '',
+      start_time: '',
+      url: '',
+      location: '',
+      images: null,
+  });
+
   submit = () => {
     form.post(route('event.store'))
   }
 }
 else if (props.state === 'edit') {
+  form = useForm({
+      title: props.event.title,
+      description: props.event.description,
+      start_date: props.event.start_date,
+      end_date: props.event.end_date,
+      start_time: props.event.start_time,
+      url: props.event.url,
+      location: props.event.location,
+      images: null,
+  });
+
   submit = () => {
     Inertia.post(route('event.update', props.event), {
       _method: 'PATCH',
@@ -112,7 +129,7 @@ else if (props.state === 'edit') {
   <template v-else>
     <InputLabel for="images" class="mt-3" value="Images, (optional, max 6, upload to replace current images)" />
   </template>
-  <input type="file" id="images" class="w-full" multiple @input="form.images = $event.target.files" />
+  <Input type="file" id="images" class="w-full" multiple @input="form.images = $event.target.files" />
   <InputError class="mt-3" :message="form.errors.images" />
 
   <PrimaryButton class="float-right mt-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

@@ -38,17 +38,17 @@ const deleteEvent = () => {
         <div class="grid grid-cols-2 gap-2 xs:grid-cols-1">
           <div v-for="image in images" :key="image.id" >
             <a :href="'/storage/'+ image.path" :data-size="image.width + 'x' + image.height" >
-              <img :src="'/storage/' + image.path" class="object-cover w-full h-full rounded-lg" />
+              <img :src="'/storage/' + image.path" class="object-cover w-full h-full shadow-md dark:shadow-none rounded-lg" />
             </a>
           </div>
         </div>
       </div>
       <div v-else>
-        <img :src="'/storage/' + images[0].path" class="object-cover w-full h-full rounded-lg" />
+        <img :src="'/storage/' + images[0].path" class="object-cover w-full h-full shadow-md dark:shadow-none rounded-lg" />
       </div>
     </div>
     <div v-else>
-      <img src="/castle.png" class="object-cover w-full h-full rounded-lg" />
+      <img src="/castle.png" class="object-cover w-full h-full shadow-md dark:shadow-none rounded-lg" />
     </div>
 
     <div>
@@ -73,7 +73,7 @@ const deleteEvent = () => {
       {{ event.description }}
     </p>
   </div> 
-  <div class="">
+  <div v-if="$page.props.auth.user">
     <SecondaryButton @click="editEvent">Edit</SecondaryButton>
     <DangerButton @click="deleteEvent">Delete</DangerButton>
   </div>

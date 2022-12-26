@@ -29,7 +29,7 @@ class EventController extends Controller
             ->limit(1)
           ])
           ->orderBy('created_at', 'desc')
-          ->paginate(3)
+          ->paginate(9)
           ->withQueryString()
         ]);
     }
