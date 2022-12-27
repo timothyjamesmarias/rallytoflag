@@ -1,3 +1,21 @@
+<style> 
+.mapboxgl-ctrl-geocoder--suggestion {
+  
+}
+.mapboxgl-ctrl-geocoder--suggestion:hover {
+  cursor: pointer;
+  background-color: #78716c;
+}
+#map-container {
+  height: 400px;
+  width: 100%;
+}
+#map {
+  height: 100%;
+  width: 100%;
+}
+</style>
+
 <script setup>
 import InputLabel from '@/Components/InputLabel.vue';
 import Input from '@/Components/Input.vue';
@@ -35,6 +53,18 @@ onMounted(() => {
   });
 
   document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+  $('.mapboxgl-ctrl-geocoder--icon-search').remove();
+  $('.mapboxgl-ctrl-geocoder--input')
+    .addClass("w-full border-gray-300 focus:border-violet-500 focus:ring-violet-500 rounded-md bg-white dark:bg-neutral-700 drop-shadow-sm dark:drop-shadow-none")
+    .removeClass("mapboxgl-ctrl-geocoder--input");
+  $('.mapboxgl-ctrl-geocoder')
+    .addClass("w-full ")
+    .removeClass("mapboxgl-ctrl")
+    .removeClass("mapboxgl-ctrl-geocoder");
+    $('.mapboxgl-ctrl-geocoder--pin-right').remove();
+    $('.suggestions').addClass("bg-white dark:bg-neutral-700 rounded absolute z-10");
+    $('.suggestions').removeClass("suggestions");
 });
 
 const search = ref(props.filters.search);
@@ -64,13 +94,3 @@ watch(search, value => {
   </div>
 </div>
 </template>
-<style scoped>
-#map-container {
-  height: 400px;
-  width: 100%;
-}
-#map {
-  height: 100%;
-  width: 100%;
-}
-</style>

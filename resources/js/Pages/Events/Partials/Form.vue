@@ -17,7 +17,7 @@ import TextAreaInput from '@/Components/TextAreaInput.vue';
 import Card from '@/Components/Card.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
-import { onMounted, onUpdated } from 'vue';
+import { onMounted } from 'vue';
 
 const mapboxToken = import.meta.env.VITE_MAPBOX;
 
