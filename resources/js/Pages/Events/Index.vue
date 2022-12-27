@@ -67,14 +67,19 @@ onMounted(() => {
     $('.suggestions').removeClass("suggestions");
 });
 
-const search = ref(props.filters.search);
+const search = ref('');
+const start_date = ref('');
 
-watch(search, value => {
-  Inertia.get('/events', {search: value}, {
-  preserveState: true,
-  replace: true,
-  });
-});
+watch(
+  () => [search.value, start_date.value],
+  ([search, start_date]) => {
+    Inertia.get('/events', {search: search, date: start_date}, {
+      preserveState: true,
+      replace: true,
+    });
+  },
+  {immediate: true}
+);
 
 </script>
 <template>
@@ -85,6 +90,8 @@ watch(search, value => {
   <div class="col-span-2 flex flex-col">
     <InputLabel for="geocoder" value="Filter by location" class=""/>
     <div id="geocoder" @input="event => search = event.target.value"></div>
+    <InputLabel for="start_date" value="Filter by date" class="mt-4"/>
+    <Input type="date" id="start_date" name="start_date" v-model="start_date" class="mt-2"/>
   </div>
 
   <div class="col-span-10">
