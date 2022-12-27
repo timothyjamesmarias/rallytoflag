@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\EventImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Spatie\Geocoder\Geocoder;
 
 class EventController extends Controller
 {
@@ -74,6 +75,15 @@ class EventController extends Controller
         'images.*' => 'nullable|file|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
       ]);
 
+      //get coordinates from geocoder
+      $client = new \GuzzleHttp\Client();
+      $geocoder = new Geocoder($client);
+      $geocoder->setApiKey(ENV('VITE_MAPBOX'));
+
+      $coordinates = $geocoder->getCoordinatesForAddress($fields['location']);
+      $longitude = $coordinates['lng'];
+      $latitude = $coordinates['lat'];
+
       $event = Event::create([
         'title' => $request->title,
         'description' => $request->description,
@@ -81,6 +91,8 @@ class EventController extends Controller
         'end_date' => $request->end_date,
         'user_id' => Auth::user()->id,
         'location' => $request->location,
+        'longitude' => $longitude,
+        'latitude' => $latitude,
         'url' => $request->url,
         'start_time' => $request->start_time,
       ]);

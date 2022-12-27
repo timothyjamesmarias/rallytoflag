@@ -46,6 +46,18 @@ onMounted(() => {
     zoom: 5, // starting zoom
   });
 
+  props.events.data.forEach((event) => {
+    new mapboxgl.Marker()
+      .setLngLat([event.longitude, event.latitude])
+      .setPopup(
+        new mapboxgl.Popup({ offset: 25 }) // add popups
+          .setHTML(
+            `<h3>${event.title}</h3><p>${event.description}</p>`
+          )
+      )
+      .addTo(map);
+  });
+
   const geocoder = new MapboxGeocoder({
     accessToken: mapboxToken,
     mapboxgl: mapboxgl,
@@ -67,8 +79,8 @@ onMounted(() => {
     $('.suggestions').removeClass("suggestions");
 });
 
-const search = ref('');
-const start_date = ref('');
+const search = ref(props.filters.search || '');
+const start_date = ref(props.filters.start_date || '');
 
 watch(
   () => [search.value, start_date.value],
@@ -91,7 +103,7 @@ watch(
     <InputLabel for="geocoder" value="Filter by location" class=""/>
     <div id="geocoder" @input="event => search = event.target.value"></div>
     <InputLabel for="start_date" value="Filter by date" class="mt-4"/>
-    <Input type="date" id="start_date" name="start_date" v-model="start_date" class="mt-2"/>
+    <Input type="date" id="start_date" name="start_date" v-model="start_date" class=""/>
   </div>
 
   <div class="col-span-10">
