@@ -1,3 +1,13 @@
+<style> 
+.mapboxgl-ctrl-geocoder--suggestion {
+  
+}
+.mapboxgl-ctrl-geocoder--suggestion:hover {
+  cursor: pointer;
+  background-color: #78716c;
+
+}
+</style>
 <script setup>
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -7,7 +17,7 @@ import TextAreaInput from '@/Components/TextAreaInput.vue';
 import Card from '@/Components/Card.vue';
 import { useForm } from '@inertiajs/inertia-vue3';
 import { Inertia } from '@inertiajs/inertia';
-import { onMounted } from 'vue';
+import { onMounted, onUpdated } from 'vue';
 
 const mapboxToken = import.meta.env.VITE_MAPBOX;
 
@@ -21,6 +31,26 @@ const props = defineProps({
     type: String,
     required: true,
   },
+});
+
+const geocoder = new MapboxGeocoder({
+  accessToken: mapboxToken,
+  types: 'country,region,place,postcode,locality,neighborhood',
+});
+
+onMounted(() => {
+  geocoder.addTo('#geocoder');
+  $('.mapboxgl-ctrl-geocoder--icon-search').remove();
+  $('.mapboxgl-ctrl-geocoder--input')
+    .addClass("w-full border-gray-300 focus:border-violet-500 focus:ring-violet-500 rounded-md bg-white dark:bg-neutral-700 drop-shadow-sm dark:drop-shadow-none")
+    .removeClass("mapboxgl-ctrl-geocoder--input");
+  $('.mapboxgl-ctrl-geocoder')
+    .addClass("w-full ")
+    .removeClass("mapboxgl-ctrl")
+    .removeClass("mapboxgl-ctrl-geocoder");
+    $('.mapboxgl-ctrl-geocoder--pin-right').remove();
+    $('.suggestions').addClass("bg-white dark:bg-neutral-700 rounded absolute z-10 w-full");
+    $('.suggestions').removeClass("suggestions");
 });
 
 let form, submit;
@@ -52,6 +82,9 @@ else if (props.state === 'edit') {
       location: props.event.location,
       images: null,
   });
+  onMounted(() => {
+    geocoder.setInput(props.event.location);
+  });
 
   submit = () => {
     Inertia.post(route('event.update', props.event), {
@@ -61,18 +94,6 @@ else if (props.state === 'edit') {
   }
 }
 
-const geocoder = new MapboxGeocoder({
-  accessToken: mapboxToken,
-  types: 'country,region,place,postcode,locality,neighborhood',
-});
-
-onMounted(() => {
-  geocoder.addTo('#geocoder');
-});
-
-const updateLocation = (e) => {
-  form.location = e.target.value;
-};
 
 </script>
 <template>
@@ -93,7 +114,7 @@ const updateLocation = (e) => {
     <InputError class="mt-3" :message="form.errors.title" />
 
     <InputLabel for="location" class="mt-3" value="Address" />
-    <div id="geocoder" @change="updateLocation($event)"></div>
+    <div id="geocoder" @change="event => form.location = event.target.value"></div>
     <InputError class="mt-3" :message="form.errors.location" />
 
     <InputLabel for="url" class="mt-3" value="Event Website (optional)" />
