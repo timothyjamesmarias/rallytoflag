@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use App\Models\EventImage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class EventController extends Controller
 {
@@ -21,8 +22,7 @@ class EventController extends Controller
         'events' => Event::query()
           ->when(request('search'), function ($query) {
             $query
-              ->where('title', 'like', '%' . request('search') . '%')
-              ->orWhere('location', 'like', '%' . request('search') . '%');
+              ->where('location', 'like', '%' . request('search') . '%');
           })
           ->addSelect(['image' => EventImage::select('path')
             ->whereColumn('event_id', 'events.id')
@@ -30,7 +30,8 @@ class EventController extends Controller
           ])
           ->orderBy('created_at', 'desc')
           ->paginate(9)
-          ->withQueryString()
+          ->withQueryString(),
+        'filters' => Request::only(['search'])
         ]);
     }
 
