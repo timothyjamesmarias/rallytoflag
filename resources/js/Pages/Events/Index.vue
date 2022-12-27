@@ -46,18 +46,6 @@ onMounted(() => {
     zoom: 5, // starting zoom
   });
 
-  props.events.data.forEach((event) => {
-    new mapboxgl.Marker()
-      .setLngLat([event.longitude, event.latitude])
-      .setPopup(
-        new mapboxgl.Popup({ offset: 25 }) // add popups
-          .setHTML(
-            `<h3>${event.title}</h3><p>${event.description}</p>`
-          )
-      )
-      .addTo(map);
-  });
-
   const geocoder = new MapboxGeocoder({
     accessToken: mapboxToken,
     mapboxgl: mapboxgl,

@@ -11,8 +11,8 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.7",
-        "spatie/geocoder": "^3.14",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.0",
+        "toin0u/geocoder-laravel": "^4.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
