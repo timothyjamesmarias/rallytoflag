@@ -8,6 +8,8 @@ use App\Models\Event;
 use App\Models\EventImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Geocoder\Query\GeocodeQuery;
+use Geocoder\Query\ReverseQuery;
 
 class EventController extends Controller
 {
@@ -74,6 +76,17 @@ class EventController extends Controller
         'images.*' => 'nullable|file|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
       ]);
 
+      //geocode the location
+      $httpClient = new \GuzzleHttp\Client();
+      $provider = new \Geocoder\Provider\Mapbox\Mapbox($httpClient, env('VITE_MAPBOX'));
+      $geocoder = new \Geocoder\StatefulGeocoder($provider, 'en');
+
+      $result = $geocoder->geocodeQuery(GeocodeQuery::create($fields['location']));
+
+      //assign the latitude and longitude to the event
+      $latitude = $result->first()->getCoordinates()->getLatitude();
+      $longitude = $result->first()->getCoordinates()->getLongitude();
+
       $event = Event::create([
         'title' => $request->title,
         'description' => $request->description,
@@ -83,6 +96,8 @@ class EventController extends Controller
         'location' => $request->location,
         'url' => $request->url,
         'start_time' => $request->start_time,
+        'latitude' => $latitude,
+        'longitude' => $longitude,
       ]);
 
       if ($request->hasFile('images')) {
