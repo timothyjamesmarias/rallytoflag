@@ -42,14 +42,21 @@ onMounted(() => {
   const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/streets-v12', // style URL
-    center: [-74.5, 40], // starting position [lng, lat]
-    zoom: 5, // starting zoom
+    center: [-87.6500523, 41.850033], // starting position [lng, lat]
+    zoom: 4, // starting zoom
+  });
+
+  props.events.data.forEach((event) => {
+    new mapboxgl.Marker()
+      .setLngLat([event.longitude, event.latitude])
+      .addTo(map);
   });
 
   const geocoder = new MapboxGeocoder({
     accessToken: mapboxToken,
     mapboxgl: mapboxgl,
-    types: 'country,region,place,postcode,locality,neighborhood',
+    countries: 'us',
+    types: 'address',
   });
 
   document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
