@@ -35,7 +35,8 @@ const props = defineProps({
 
 const geocoder = new MapboxGeocoder({
   accessToken: mapboxToken,
-  types: 'country,region,place,postcode,locality,neighborhood',
+  countries: 'us',
+  types: 'address',
 });
 
 onMounted(() => {

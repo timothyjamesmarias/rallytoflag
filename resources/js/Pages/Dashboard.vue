@@ -17,6 +17,7 @@ const props = defineProps({
   <div class="w-full lg:md:max-w-4xl sm:max-w-md">
     <div class="flex justify-between">
     <h1 class="text-xl font-bold">My Dashboard</h1>
+    <PrimaryButton v-if="$page.props.auth.user.is_admin"><Link :href="route('admin')" v-html="'Admin Dashboard'"/></PrimaryButton>
     <PrimaryButton><Link :href="route('profile.edit')" v-html="'Account Settings'"/></PrimaryButton>
     </div>
 </div>
