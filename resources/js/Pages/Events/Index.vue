@@ -1,7 +1,4 @@
 <style> 
-.mapboxgl-ctrl-geocoder--suggestion {
-  
-}
 .mapboxgl-ctrl-geocoder--suggestion:hover {
   cursor: pointer;
   background-color: #78716c;
@@ -21,9 +18,10 @@ import InputLabel from '@/Components/InputLabel.vue';
 import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
 import EventCard from '@/Components/EventCard.vue';
-import {ref, computed, onMounted, onBeforeUnmount, watch} from 'vue';
+import {ref, computed, onMounted, watch} from 'vue';
 import {Inertia} from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/inertia-vue3'
+
 const props = defineProps({
     events: {
         type: Object,
@@ -38,20 +36,41 @@ const props = defineProps({
 const mapboxToken = import.meta.env.VITE_MAPBOX;
 mapboxgl.accessToken = mapboxToken;
 
-onMounted(() => {
-  const map = new mapboxgl.Map({
+let map = ref(null);
+let markers = ref([]);
+let currentState = ref(null);
+const search = ref(props.filters.search || '');
+const start_date = ref(props.filters.start_date || '');
+
+const resetMarkers = () => {
+  markers.value.forEach(marker => {
+    marker.remove();
+  });
+  markers.value = [];
+}
+
+const updateMarkers = (map) =>{
+  resetMarkers();
+  props.events.data.forEach(event => {
+    if (event.location) {
+      const marker = new mapboxgl.Marker()
+        .setLngLat([event.longitude, event.latitude])
+        .addTo(map);
+      markers.value.push(marker);
+    }
+  });
+}
+
+const initMap = () => {
+  map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/streets-v12', // style URL
     center: [-87.6500523, 41.850033], // starting position [lng, lat]
     zoom: 4, // starting zoom
   });
+}
 
-  props.events.data.forEach((event) => {
-    new mapboxgl.Marker()
-      .setLngLat([event.longitude, event.latitude])
-      .addTo(map);
-  });
-
+const initGeocoder = () => {
   const geocoder = new MapboxGeocoder({
     accessToken: mapboxToken,
     mapboxgl: mapboxgl,
@@ -72,10 +91,13 @@ onMounted(() => {
     $('.mapboxgl-ctrl-geocoder--pin-right').remove();
     $('.suggestions').addClass("bg-white dark:bg-neutral-700 rounded absolute z-10");
     $('.suggestions').removeClass("suggestions");
-});
+}
 
-const search = ref(props.filters.search || '');
-const start_date = ref(props.filters.start_date || '');
+onMounted(
+  () => {
+  initMap();
+  initGeocoder();
+});
 
 watch(
   () => [search.value, start_date.value],
@@ -86,6 +108,15 @@ watch(
     });
   },
   {immediate: true}
+);
+
+watch(
+  () => props.events,
+  (events) => {
+    if (map) {
+      updateMarkers(map);
+    }
+  },
 );
 
 </script>
