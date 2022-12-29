@@ -18,9 +18,9 @@ import InputLabel from '@/Components/InputLabel.vue';
 import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
 import EventCard from '@/Components/EventCard.vue';
-import {ref, computed, onMounted, watch} from 'vue';
+import {ref, onUpdated, onMounted, watch} from 'vue';
 import {Inertia} from '@inertiajs/inertia';
-import { usePage } from '@inertiajs/inertia-vue3'
+import { useDark } from '@vueuse/core';
 
 const props = defineProps({
     events: {
@@ -41,6 +41,7 @@ let markers = ref([]);
 let currentState = ref(null);
 const search = ref(props.filters.search || '');
 const start_date = ref(props.filters.start_date || '');
+const isDark = ref(useDark());
 
 const resetMarkers = () => {
   markers.value.forEach(marker => {
@@ -99,6 +100,16 @@ onMounted(
   initGeocoder();
 });
 
+onUpdated(
+  () => {
+    if (isDark.value) {
+      map.setStyle('mapbox://styles/mapbox/dark-v10');
+    } else {
+      map.setStyle('mapbox://styles/mapbox/streets-v12');
+    }
+  }
+);
+
 watch(
   () => [search.value, start_date.value],
   ([search, start_date]) => {
@@ -118,6 +129,7 @@ watch(
     }
   },
 );
+
 
 </script>
 <template>
