@@ -1,8 +1,7 @@
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3'
+import { useForm } from '@inertiajs/inertia-vue3';
 import Input from '@/Components/Input.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import Card from '@/Components/Card.vue';
 import { ref } from 'vue';
 
 const form = useForm({
@@ -10,19 +9,25 @@ const form = useForm({
 });
 
 const search = () => {
+  form.get(route('event.index'), {
+    preserveState: true,
+    preserveScroll: true,
+  });
 }
 </script>
 
 <template>
   <Head title="Welcome" />
     
-<Card class="min-h-screen">
-  <span class="inline-flex items-center text-center">
-    <p class="text-lg pr-4">I am looking for events near</p>
+<div class="min-h-screen flex flex-row justify-center items-center">
+  <span class="flex flex-wrap items-center max-w-xs xs:max-w-fit p-4
+  bg-neutral-100 dark:bg-neutral-800 border border-gray-800 dark:border-gray-400 
+  drop-shadow-md dark:drop-shadow-none rounded-lg">
+    <p class="text-lg sm:pr-4">I'm looking for events near</p>
     <form @submit.prevent="search">
-      <Input type="text" v-model="query" />
-      <PrimaryButton @submit.prevent="search" class="ml-4">Search</PrimaryButton>
+      <Input type="text" class="mt-2 sm:mt-0 "/>
+      <PrimaryButton @submit.prevent="search" class="mt-2 sm:mt-0 sm:ml-4">Search</PrimaryButton>
     </form>
   </span>
-</Card>
+</div>
 </template>

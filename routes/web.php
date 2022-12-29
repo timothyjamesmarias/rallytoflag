@@ -36,6 +36,10 @@ Route::get('/about', function () {
     return Inertia::render('About');
 });
 
+Route::get('/terms', function () {
+    return Inertia::render('TermsOfService');
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
       'events' => Event::query()

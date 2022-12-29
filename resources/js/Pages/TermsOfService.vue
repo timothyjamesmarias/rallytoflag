@@ -2,6 +2,6 @@
 import UnderConstruction from '@/Components/UnderConstruction.vue';
 </script>
 <template>
-<Head title="Help" />
+<Head title="Terms of Service" />
 <UnderConstruction />
 </template>
