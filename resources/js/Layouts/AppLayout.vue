@@ -11,3 +11,8 @@ import NavBar from '@/Components/NavBar.vue';
   </main>
 </div>
 </template>
+<style global>
+html.dark {
+  color-scheme: dark;
+}
+</style>
