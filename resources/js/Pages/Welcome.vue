@@ -17,7 +17,7 @@ const search = () => {
   <Head title="Welcome" />
     
 <Card class="min-h-screen">
-  <span class="inline-flex items-center">
+  <span class="inline-flex items-center text-center">
     <p class="text-lg pr-4">I am looking for events near</p>
     <form @submit.prevent="search">
       <Input type="text" v-model="query" />
