@@ -18,14 +18,14 @@ let showMenu = ref(false);
     Rally To Flag
   </Link>
 
-  <div class="flex items-center hidden sm:block">
+  <div class="hidden sm:flex items-center">
     <DarkModeToggle class="mr-4"/>
-    <NavLink :href="'/events'" class="pr-4">
+    <NavLink :href="'/events'" class="mr-4">
     Events
     </NavLink>
 
     <template v-if="$page.props.auth.user">
-    <NavLink :href="'/dashboard'" class="pr-4">
+    <NavLink :href="'/dashboard'" class="mr-4">
     Dashboard
     </NavLink>
     <form method="POST" @submit.prevent="logout" class="">
@@ -45,38 +45,36 @@ let showMenu = ref(false);
     </template>
   </div>
 
-  <div class="flex items-center xl:lg:md:hidden">
+  <div class="flex items-center sm:hidden">
     <DarkModeToggle class="mr-4"/>
     <button @click="showMenu = !showMenu">
       <font-awesome-icon icon="fa-solid fa-bars" class="text-2xl"/>
     </button>
   </div>
 </div>
-<div id="menu" :class="{ hidden: !showMenu, 'inline-flex': showMenu}" class="w-full sm:items-center sm:w-auto">
-  <div class="flex-grow">
+<div id="menu" :class="{ hidden: !showMenu, 'block': showMenu}" class="md:hidden pt-2 text-right w-full items-center w-auto">
   <NavLink :href="'/events'" class="block">
   Events
   </NavLink>
   <template v-if="$page.props.auth.user">
-  <NavLink :href="'/dashboard'" class="block">
+  <NavLink :href="'/dashboard'" class="mt-1 block">
   Dashboard
   </NavLink>
-  <form method="POST" @submit.prevent="logout" class="">
-    <button type="submit" class="hover:text-violet-300">
+  <form method="POST" @submit.prevent="logout">
+    <button type="submit" class="mt-1 hover:text-violet-300">
         Logout
     </button>
   </form>
   </template>
 
   <template v-else>
-  <NavLink :href="'/login'" class="block">
+  <NavLink :href="'/login'" class="block mt-1">
   Login
   </NavLink>
-  <NavLink :href="'/register'" class="block">
+  <NavLink :href="'/register'" class="mt-1 block">
   Register
   </NavLink>
   </template>
-</div>
 </div>
 </nav>
 </template>
