@@ -1,8 +1,4 @@
 <style> 
-.mapboxgl-ctrl-geocoder--suggestion:hover {
-  cursor: pointer;
-  background-color: #78716c;
-}
 #map-container {
   height: 400px;
   width: 100%;
@@ -22,6 +18,7 @@ import Paginator from '@/Components/Paginator.vue';
 import {ref, computed, onMounted, watch} from 'vue';
 import {Inertia} from '@inertiajs/inertia';
 import { useDark } from '@vueuse/core';
+import setupGeocoder from '@/Helpers/Geocoder.js';
 
 const props = defineProps({
     events: {
@@ -85,24 +82,12 @@ const initGeocoder = () => {
   });
 
   document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-
-  $('.mapboxgl-ctrl-geocoder--icon-search').remove();
-  $('.mapboxgl-ctrl-geocoder--input')
-    .addClass("w-full border-gray-300 focus:border-violet-500 focus:ring-violet-500 rounded-md bg-white dark:bg-neutral-700 drop-shadow-sm dark:drop-shadow-none")
-    .removeClass("mapboxgl-ctrl-geocoder--input");
-  $('.mapboxgl-ctrl-geocoder')
-    .addClass("w-full ")
-    .removeClass("mapboxgl-ctrl")
-    .removeClass("mapboxgl-ctrl-geocoder");
-    $('.mapboxgl-ctrl-geocoder--pin-right').remove();
-    $('.suggestions').addClass("bg-white dark:bg-neutral-700 rounded absolute z-10");
-    $('.suggestions').removeClass("suggestions");
 }
-
 onMounted(
   () => {
-  initMap();
-  initGeocoder();
+    initMap();
+    initGeocoder();
+    setupGeocoder();
 });
 
 watch(
@@ -125,7 +110,6 @@ watch(
   },
 );
 
-
 </script>
 <template>
 <div id="map-container">
@@ -134,7 +118,7 @@ watch(
 <div class="grid lg:md:sm:grid-cols-12 xs:grid-cols-1 gap-4 p-4">
   <div class="col-span-2 flex flex-col">
     <InputLabel for="geocoder" value="Filter by location" class=""/>
-    <div id="geocoder" @input="event => search = event.target.value"></div>
+    <div id="geocoder" @input="$event => search = $event.target.value"></div>
     <InputLabel for="start_date" value="Filter by date" class="mt-4"/>
     <Input type="date" id="start_date" name="start_date" v-model="start_date" class=""/>
   </div>
