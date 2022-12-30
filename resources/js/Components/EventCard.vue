@@ -7,20 +7,19 @@ const props = defineProps({
 });
 </script>
 <template>
-<Link :href="route('event.show', event.id)" class="xl:lg:md:sm:max-h-[400px] xs:max-h-[200px] 
+<Link :href="route('event.show', event.id)">
+<div class="rounded-lg bg-neutral-100 dark:bg-neutral-800
 border border-gray-500 hover:border-violet-800 dark:hover:border-violet-300 rounded-lg">
-<div class="min-h-full rounded-lg bg-neutral-100 dark:bg-neutral-800">
   <img v-if="event.image !== null" :src="'/storage/' + event.image" alt="event image" 
   class="xl:lg:md:sm:max-h-[200px] xs:max-h-[100px] object-cover w-full rounded-t-lg" />
   <img v-else src="castle.png" alt="event image" 
-  class="xl:lg:md:sm:max-h-[200px] xs:max-h-[100px] object-cover w-full rounded-t-lg" />
+  class="h-[200px] sm:h-[300px] object-cover w-full rounded-t-lg" />
 
-  <div class="flex flex-col p-4">
+  <div class="p-4 min-h-fit max-h-[200px]">
     <h3 class="text-lg font-bold pb-1">{{ event.title }}</h3>
     <p class="pb-1">{{ event.location }}</p>
     <p class="pb-1"><strong>Starts on </strong>{{ event.start_date }}</p>
     <p v-if="event.end_date !== null" class="pb-1"><strong>Ends on </strong>{{ event.end_date }}</p>
-    <p>Posted on {{ event.created_at }}</p>
   </div>
 </div>
 </Link>
