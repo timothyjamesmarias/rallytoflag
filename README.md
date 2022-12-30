@@ -4,4 +4,5 @@
 - Laravel 9
 - MySQL (MariaDB)
 - Vue 3
-- Inertia JS
+- Inertia
+- Tailwind
