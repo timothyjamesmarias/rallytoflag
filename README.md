@@ -2,7 +2,7 @@
 
 ## Tech Stack:
 - Laravel 9
-- MySQL (MariaDB 10)
+- MySQL (MariaDB)
 - Vue 3
 - Inertia
 - Tailwind
@@ -23,7 +23,21 @@ npm install
 
 ```
 php artisan serve
+```
 
+```
 npm run dev
 ```
+
+## How to Contribute
+
+[Read the rules for contributing](./CONTRIBUTING.md)
+
+[Join the discord](https://discord.gg/H9pybNyeFa)
+
+## Code of Conduct
+
+[Read the Code of Conduct](./CODEOFCONDUCT.md)
+
+## License
 
