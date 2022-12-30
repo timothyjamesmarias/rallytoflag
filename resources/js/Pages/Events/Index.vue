@@ -18,6 +18,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import Input from '@/Components/Input.vue';
 import InputError from '@/Components/InputError.vue';
 import EventCard from '@/Components/EventCard.vue';
+import Paginator from '@/Components/Paginator.vue';
 import {ref, computed, onMounted, watch} from 'vue';
 import {Inertia} from '@inertiajs/inertia';
 import { useDark } from '@vueuse/core';
@@ -142,6 +143,7 @@ watch(
     <div class="grid lg:grid-cols-3 md:sm:grid-cols-2 xs:grid-cols-1 gap-4">
       <EventCard v-for="event in events.data" :key="event.id" :event="event" />
     </div>
+    <Paginator :links="events.links" class="mt-4"/>
   </div>
 </div>
 </template>
