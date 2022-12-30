@@ -1,19 +1,18 @@
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
 import Input from '@/Components/Input.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
-const form = useForm({
-  query: '',
-});
+const address = ref('');
 
 const search = () => {
-  form.get(route('event.index'), {
+  Inertia.get('/events', {search: address.value, date: ''}, {
     preserveState: true,
-    preserveScroll: true,
+    replace: true,
   });
 }
+
 </script>
 
 <template>
@@ -25,7 +24,7 @@ const search = () => {
     drop-shadow-md dark:drop-shadow-none rounded-lg">
       <p class="text-lg sm:pr-4">I'm looking for events near</p>
       <form @submit.prevent="search">
-        <Input type="text" class="mt-2 sm:mt-0 "/>
+        <Input v-model="address" placeholder="Corvallis, Oregon" />
         <PrimaryButton @submit.prevent="search" class="mt-2 sm:mt-0 sm:ml-4">Search</PrimaryButton>
       </form>
     </span>
