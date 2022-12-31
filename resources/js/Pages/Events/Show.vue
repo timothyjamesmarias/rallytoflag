@@ -74,7 +74,7 @@ const deleteEvent = () => {
     </p>
   </div> 
   <div v-if="$page.props.auth.user">
-    <SecondaryButton @click="editEvent">Edit</SecondaryButton>
+    <SecondaryButton @click="editEvent" class="mr-4">Edit</SecondaryButton>
     <DangerButton @click="deleteEvent">Delete</DangerButton>
   </div>
 </div>
