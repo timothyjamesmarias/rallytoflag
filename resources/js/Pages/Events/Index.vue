@@ -128,6 +128,7 @@ watch(
 
 </script>
 <template>
+<Head title="Events" />
 <div id="map-container">
   <div id="map"></div>
 </div>
