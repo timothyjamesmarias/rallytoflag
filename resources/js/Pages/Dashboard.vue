@@ -14,6 +14,12 @@ const props = defineProps({
 <template>
 <Head title="Dashboard" />
 <div class="flex flex-col items-center pt-6">
+  <div v-if="$page.props.flash.success" class="p-4 border border-2 rounded-lg bg-green-300 dark:bg-green-600 border-green-900 opacity-80">
+    {{ $page.props.flash.success }}
+  </div>
+  <div v-if="$page.props.flash.error" class="p-4 border border-2 rounded-lg bg-red-300 dark:bg-red-600 border-red-900 opacity-80">
+    {{ $page.props.flash.error }}
+  </div>
   <div class="w-full lg:md:max-w-4xl sm:max-w-md">
     <div class="flex justify-between">
     <h1 class="text-xl font-bold">My Dashboard</h1>

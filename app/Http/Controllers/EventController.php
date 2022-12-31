@@ -224,7 +224,11 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-      Event::destroy($event);
-      return response('Event Deleted', 204);
+      if(Event::destroy($event->id)){
+        return redirect()->route('dashboard')->with('success', 'Event deleted successfully');
+      }
+      else {
+        return redirect()->route('dashboard')->with('error', 'Event could not be deleted');
+      }
     }
 }
