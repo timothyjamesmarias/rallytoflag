@@ -6,6 +6,8 @@
 - Vue 3
 - Inertia
 - Tailwind
+- PHP 8.1
+- Node 16
 
 ## Installation
 
@@ -37,7 +39,8 @@ npm run dev
 
 ## Code of Conduct
 
-[Read the Code of Conduct](./CODEOFCONDUCT.md)
+[Read the Code of Conduct](./CODE_OF_CONDUCT.md)
 
 ## License
 
+[Project License](./LICENSE.md)
